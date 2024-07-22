@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diq2qifry343k"
-path="res://.godot/imported/mario3.png-3f36bbf4c99f1960e6f24f1beb6c9b08.ctex"
+uid="uid://bgpj3jelgivfn"
+path="res://.godot/imported/big_mario_run3.png-04c1b3936f959acccd0220877d287557.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/mario3.png"
-dest_files=["res://.godot/imported/mario3.png-3f36bbf4c99f1960e6f24f1beb6c9b08.ctex"]
+source_file="res://Assets/sprites/mario/big_mario_run3.png"
+dest_files=["res://.godot/imported/big_mario_run3.png-04c1b3936f959acccd0220877d287557.ctex"]
 
 [params]
 
