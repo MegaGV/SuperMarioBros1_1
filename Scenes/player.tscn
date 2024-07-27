@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bkj72hirxail7"]
+[gd_scene load_steps=26 format=3 uid="uid://bkj72hirxail7"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_uinwr"]
 [ext_resource type="Texture2D" uid="uid://dy7vn1m3ih2dw" path="res://Assets/sprites/mario/big_mario_idle.png" id="2_xhmun"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://diq2qifry343k" path="res://Assets/sprites/mario/small_mario_run2.png" id="19_hqcd8"]
 [ext_resource type="Texture2D" uid="uid://cusry6gjtsuhu" path="res://Assets/sprites/mario/small_mario_run3.png" id="20_ctu6w"]
 [ext_resource type="Texture2D" uid="uid://cjqo82gvgajwn" path="res://Assets/sprites/mario/small_mario_slide.png" id="21_08n0v"]
+[ext_resource type="Script" path="res://Scripts/player_animated_sprite.gd" id="23_riqs1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ps0op"]
 animations = [{
@@ -288,6 +289,7 @@ script = ExtResource("1_uinwr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ps0op")
 animation = &"small_idle"
+script = ExtResource("23_riqs1")
 
 [node name="Area2D" type="Area2D" parent="."]
 

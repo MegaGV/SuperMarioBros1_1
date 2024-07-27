@@ -16,8 +16,8 @@ enum PlayerMode {
 @onready var body_collision_shape = $BodyCollisionShape2D
 
 @export_group("Locomotion")
-@export var run_speed_damping = 0.5
-@export var speed = 200.0
+@export var RUN_SPEED_DAMPING = 0.5
+@export var SPEED = 200.0
 @export var jump_velocity = -350
 @export_group("")
 
@@ -39,11 +39,11 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("left", "right")
 	if direction:
-		#velocity.x = direction * speed
-		velocity.x = lerpf(velocity.x, speed * direction, run_speed_damping * delta)
+		# 使用线性插值让速度逐步上升
+		velocity.x = lerpf(velocity.x, SPEED * direction, RUN_SPEED_DAMPING * delta)
 	else:
-		#velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.x = move_toward(velocity.x, 0, speed * delta)
+		# 速度缓慢变化模拟移动惯性
+		velocity.x = move_toward(velocity.x, 0, SPEED * delta)
 
 	# play animaiton
 	if animated_sprite_2d != null:
