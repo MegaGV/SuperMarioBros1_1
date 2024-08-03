@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/goomba.gd" id="1_k0h4w"]
 [ext_resource type="Texture2D" uid="uid://bckvqk1g2xqei" path="res://Assets/sprites/enemy/goomba_walk1.png" id="2_btdet"]
 [ext_resource type="Texture2D" uid="uid://b8qrdheqnbsk8" path="res://Assets/sprites/enemy/goomba_walk2.png" id="3_m436e"]
+[ext_resource type="Shape2D" uid="uid://1q5yvca0bn2v" path="res://Resource/CollisionShapes/goomba_normal_collision_shape.tres" id="5_tr80e"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wwpxx"]
 animations = [{
@@ -27,16 +28,22 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xte0"]
-size = Vector2(16, 16)
-
 [node name="Goomba" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_k0h4w")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wwpxx")
-animation = &"walk"
+animation = &"death"
 autoplay = "walk"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_1xte0")
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="AreaCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = ExtResource("5_tr80e")
+
+[node name="BodyCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("5_tr80e")

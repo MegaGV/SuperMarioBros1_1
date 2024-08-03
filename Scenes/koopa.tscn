@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/koopa.gd" id="1_vshql"]
 [ext_resource type="Texture2D" uid="uid://du4mlmuegusdp" path="res://Assets/sprites/enemy/koopa_walk1.png" id="2_mckia"]
 [ext_resource type="Texture2D" uid="uid://duqi8qv27xc3n" path="res://Assets/sprites/enemy/koopa_walk2.png" id="3_r75fw"]
+[ext_resource type="Shape2D" uid="uid://dro5ky87unhsr" path="res://Resource/CollisionShapes/koopa_normal_collision_shape.tres" id="5_x054g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wbr65"]
 animations = [{
@@ -27,17 +28,25 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5x8t"]
-size = Vector2(16, 20)
-
 [node name="Koopa" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_vshql")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_wbr65")
-animation = &"walk"
+animation = &"shell"
 autoplay = "walk"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_e5x8t")
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="AreaCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = ExtResource("5_x054g")
+
+[node name="BodyCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = ExtResource("5_x054g")

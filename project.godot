@@ -57,12 +57,11 @@ action={
 [layer_names]
 
 2d_physics/layer_1="player"
-2d_physics/layer_2="ground"
+2d_physics/layer_2="stage"
 2d_physics/layer_3="enemy"
-2d_physics/layer_4="koopa_stomped"
-2d_physics/layer_5="obstacle"
-2d_physics/layer_6="bonus"
-2d_physics/layer_7="fireball"
+2d_physics/layer_4="item"
+2d_physics/layer_5="background"
+2d_physics/layer_6="fireball"
 
 [rendering]
 
