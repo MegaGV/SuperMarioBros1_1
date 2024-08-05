@@ -11,6 +11,10 @@ enum PlayerMode {
 	FIRE
 }
 
+#signal points_scored(points: int)
+
+const POINTS_LABEL_SCENE = preload("res://Scenes/points_label.tscn")
+
 @onready var animated_sprite_2d = $AnimatedSprite2D as PlayerAnimatedSprite
 @onready var area_collision_shape = $Area2D/AreaCollisionShape2D
 @onready var body_collision_shape = $BodyCollisionShape2D
@@ -75,6 +79,7 @@ func handle_enemy_collision(enemyArea: Area2D):
 	if angle_of_collision > MIN_STOMP_DEGREE && angle_of_collision < MAX_STOMP_DEGREE:
 		enemyArea.get_parent().stomped(angle_of_collision)
 		on_enemy_stomped()
+		spawn_points_label(enemyArea)
 	else:
 		death()
 
@@ -83,3 +88,10 @@ func on_enemy_stomped():
 
 func death():
 	print("you died")	
+
+func spawn_points_label(enemyArea: Area2D):
+	var points_label = POINTS_LABEL_SCENE.instantiate()
+	points_label.position = enemyArea.global_position + Vector2(-20, -20)
+	get_tree().root.add_child(points_label)
+	#emit_signal("points_scored", 100)
+	pass

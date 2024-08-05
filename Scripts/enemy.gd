@@ -30,7 +30,7 @@ func stomped(angle_of_collision : float):
 func death():
 	set_collision_layer_value(3, false)
 	area_2d.set_collision_layer_value(3, false)
-	pass
+	get_tree().create_timer(1).timeout.connect(queue_free)
 	
 func update_collision_shape(shape, position):
 	body_collision_shape_2d.set_deferred("position", position)
