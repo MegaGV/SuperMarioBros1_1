@@ -13,8 +13,6 @@ enum PlayerMode {
 
 #signal points_scored(points: int)
 
-const POINTS_LABEL_SCENE = preload("res://Scenes/points_label.tscn")
-
 @onready var animated_sprite_2d = $AnimatedSprite2D as PlayerAnimatedSprite
 @onready var area_collision_shape = $Area2D/AreaCollisionShape2D
 @onready var body_collision_shape = $BodyCollisionShape2D
@@ -55,10 +53,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED * delta)
 
 	# play animaiton
-	if animated_sprite_2d != null:
-		animated_sprite_2d.trigger_animation(velocity, direction, player_mode)
-	else:
-		print("Animator is not initialized!")
+	animated_sprite_2d.trigger_animation(velocity, direction, player_mode)
 	
 	move_and_slide()
 
@@ -68,30 +63,22 @@ func _on_area_2d_area_entered(area):
 		handle_enemy_collision(area)
 
 func handle_enemy_collision(enemyArea: Area2D):
-	#var enemyName = enemyArea.get_parent().name
-	#print("enemy: %s" % enemyName)
-	
 	# 计算两者的角度 rad_to_deg将弧度转换为度数,angle_to_point 函数计算从当前对象的位置到指定点的角度（弧度值）
 	var angle_of_collision = rad_to_deg(position.angle_to_point(enemyArea.global_position ))
-	#print("(", enemyArea.global_position.x, ",", enemyArea.global_position .y, ")")
-	#print("%s" % angle_of_collision)
-	
+	# 判断是否踩在怪头上，是则触发踩怪头的逻辑，否则死亡
 	if angle_of_collision > MIN_STOMP_DEGREE && angle_of_collision < MAX_STOMP_DEGREE:
-		enemyArea.get_parent().stomped(angle_of_collision)
+		enemyArea.get_parent().stomped(position)
 		on_enemy_stomped()
-		spawn_points_label(enemyArea)
+	# 碰到壳状态的乌龟，龟壳发射
+	elif enemyArea.get_parent().name == "Koopa" && enemyArea.get_parent().in_shell: 
+		enemyArea.get_parent().launch(position)
+	# 你已经死了
 	else:
 		death()
 
+# 踩怪头，弹起来一点点
 func on_enemy_stomped():
 	velocity.y = STOMP_Y_VELOCITY
 
 func death():
 	print("you died")	
-
-func spawn_points_label(enemyArea: Area2D):
-	var points_label = POINTS_LABEL_SCENE.instantiate()
-	points_label.position = enemyArea.global_position + Vector2(-20, -20)
-	get_tree().root.add_child(points_label)
-	#emit_signal("points_scored", 100)
-	pass

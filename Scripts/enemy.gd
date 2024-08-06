@@ -24,7 +24,7 @@ func _ready():
 func _process(delta):
 	pass
 
-func stomped(angle_of_collision : float):
+func stomped(playerPosition : Vector2):
 	pass
 
 func death():

@@ -50,3 +50,5 @@ shape = ExtResource("5_x054g")
 [node name="BodyCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = ExtResource("5_x054g")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
