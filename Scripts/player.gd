@@ -59,19 +59,21 @@ func _physics_process(delta):
 
 
 func _on_area_2d_area_entered(area):
-	if area.get_parent().get_parent().name == "Enemies": # Area2D->Koopa->Enemies
+	if area.get_parent() is Enemy: # Area2D->Koopa
 		handle_enemy_collision(area)
 
 func handle_enemy_collision(enemyArea: Area2D):
 	# 计算两者的角度 rad_to_deg将弧度转换为度数,angle_to_point 函数计算从当前对象的位置到指定点的角度（弧度值）
 	var angle_of_collision = rad_to_deg(position.angle_to_point(enemyArea.global_position ))
+	
 	# 判断是否踩在怪头上，是则触发踩怪头的逻辑，否则死亡
+	var enemy = enemyArea.get_parent()
 	if angle_of_collision > MIN_STOMP_DEGREE && angle_of_collision < MAX_STOMP_DEGREE:
-		enemyArea.get_parent().stomped(position)
+		enemy.stomped(position)
 		on_enemy_stomped()
-	# 碰到壳状态的乌龟，龟壳发射
-	elif enemyArea.get_parent().name == "Koopa" && enemyArea.get_parent().in_shell: 
-		enemyArea.get_parent().launch(position)
+	# 碰到静止的壳状态的乌龟，龟壳发射
+	elif enemy is Koopa && enemy.is_reachable(): 
+		enemy.launch(position)
 	# 你已经死了
 	else:
 		death()

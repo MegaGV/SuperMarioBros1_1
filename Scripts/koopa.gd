@@ -13,10 +13,7 @@ const SHELL_X_SPEED = 400
 var in_shell = false
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	
+	basic_move(delta)
 	move(delta)
 	move_and_slide()
 
@@ -26,15 +23,16 @@ func move(delta):
 func stomped(playerPosition : Vector2):
 	ScoreUtils.spawn_points_label(area_2d, 100)
 	if (in_shell):
-		launch(playerPosition)
+		if (speed_x == 0):
+			launch(playerPosition)
+		else:
+			speed_x = 0
 	else:
 		toShell()
 
 func launch(playerPosition : Vector2):
-	if playerPosition.x > global_position.x:
-		speed_x = SHELL_X_SPEED
-	else:
-		speed_x = -SHELL_X_SPEED
+	direction = -1 if playerPosition.x > global_position.x else 1
+	speed_x = SHELL_X_SPEED
 
 func toShell():
 	update_collision_shape(KOOPA_SHELL_COLLISION_SHAPE, KOOPA_SHELL_COLLISION_SHAPE_POSITION)
@@ -48,17 +46,14 @@ func backToNormal():
 	velocity.y = STOMP_Y_VELOCITY
 	update_collision_shape(KOOPA_NORMAL_COLLISION_SHAPE, KOOPA_NORMAL_COLLISION_SHAPE_POSITON)
 	animated_sprite_2d.play("move")
-	speed_x = SPEED_DEFAULT
+	speed_x = DEFAULT_X_SPEED
 	in_shell = false
 	area_2d.set_collision_mask_value(3, false)
 
-func death():
-	super.death()
-	speed_x = 0
-	speed_y = 0
-	animated_sprite_2d.play("death")
+func is_reachable():
+	return in_shell && speed_x == 0
 
 func _on_area_2d_area_entered(area):
-	if area.get_parent().name == "Goomba":
-		print("击中友军!")
-		area.get_parent().killed()
+	if speed_x != 0:
+		if area.get_parent() is Enemy:
+			area.get_parent().killed(position)
