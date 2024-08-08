@@ -34,10 +34,7 @@ func basic_move(delta):
 		scale.x = -scale.x
 
 func killed(killerPosition: Vector2):
-	if (killerPosition.x >= position.x):
-		direction = -1
-	else:
-		direction = 1
+	direction = -1 if killerPosition.x >= position.x else 1
 	velocity.y = KILL_Y_VELOCITY
 	set_collision_mask_value(2, false)
 	animated_sprite_2d.stop()

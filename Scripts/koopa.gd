@@ -8,7 +8,7 @@ const KOOPA_SHELL_COLLISION_SHAPE_POSITION = Vector2(0, -2)
 const KOOPA_NORMAL_COLLISION_SHAPE_POSITON = Vector2(0, 0)
 
 const STOMP_Y_VELOCITY = -50
-const SHELL_X_SPEED = 400
+const SHELL_X_SPEED = 250
 
 var in_shell = false
 
@@ -57,3 +57,7 @@ func _on_area_2d_area_entered(area):
 	if speed_x != 0:
 		if area.get_parent() is Enemy:
 			area.get_parent().killed(position)
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	print("Koopa out")
+	queue_free()
