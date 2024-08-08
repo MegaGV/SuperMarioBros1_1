@@ -16,6 +16,7 @@ enum PlayerMode {
 @onready var animated_sprite_2d = $AnimatedSprite2D as PlayerAnimatedSprite
 @onready var area_collision_shape = $Area2D/AreaCollisionShape2D
 @onready var body_collision_shape = $BodyCollisionShape2D
+@onready var area_2d = $Area2D
 
 @export_group("Locomotion")
 @export var RUN_SPEED_DAMPING = 0.5
@@ -30,12 +31,12 @@ enum PlayerMode {
 @export_group("")
 
 var player_mode = PlayerMode.SMALL
+var is_dead = false
 
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor(): # groud
 		velocity.y = JUMP_VELOCITY
@@ -57,8 +58,9 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
-
 func _on_area_2d_area_entered(area):
+	if is_dead:
+		return
 	if area.get_parent() is Enemy: # Area2D->Koopa
 		handle_enemy_collision(area)
 
@@ -83,4 +85,20 @@ func on_enemy_stomped():
 	velocity.y = STOMP_Y_VELOCITY
 
 func death():
-	print("you died")	
+	print("you died")
+	if player_mode == PlayerMode.BIG:
+		pass
+	elif player_mode == PlayerMode.FIRE:
+		pass
+	else: # small
+		is_dead = true
+		animated_sprite_2d.play("death")
+		set_physics_process(false)
+		area_2d.set_collision_layer_value(1, false)
+		
+		# play death move
+		var death_tween = get_tree().create_tween()
+		death_tween.tween_property(self, "position", position + Vector2(0, -50), 0.5)
+		death_tween.chain().tween_property(self, "position", position + Vector2(0, 256), 1)
+		# after death reset game
+		death_tween.tween_callback(func (): get_tree().reload_current_scene())
