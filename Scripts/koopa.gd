@@ -45,7 +45,7 @@ func toShell():
 func backToNormal():
 	velocity.y = STOMP_Y_VELOCITY
 	update_collision_shape(KOOPA_NORMAL_COLLISION_SHAPE, KOOPA_NORMAL_COLLISION_SHAPE_POSITON)
-	animated_sprite_2d.play("move")
+	animated_sprite_2d.play("walk")
 	speed_x = DEFAULT_X_SPEED
 	in_shell = false
 	area_2d.set_collision_mask_value(3, false)
@@ -59,5 +59,4 @@ func _on_area_2d_area_entered(area):
 			area.get_parent().killed(position)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	print("Koopa out")
 	queue_free()

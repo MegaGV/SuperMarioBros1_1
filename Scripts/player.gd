@@ -76,15 +76,14 @@ func handle_enemy_collision(enemyArea: Area2D):
 	# 碰到静止的壳状态的乌龟，龟壳发射
 	elif enemy is Koopa && enemy.is_reachable(): 
 		enemy.launch(position)
-	# 你已经死了
 	else:
-		death()
+		affected()
 
 # 踩怪头，弹起来一点点
 func on_enemy_stomped():
 	velocity.y = STOMP_Y_VELOCITY
 
-func death():
+func affected():
 	print("you died")
 	if player_mode == PlayerMode.BIG:
 		pass

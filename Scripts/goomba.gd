@@ -23,5 +23,4 @@ func stomped(_playerPosition : Vector2):
 	ScoreUtils.spawn_points_label(area_2d, 100)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	print("Goomba out")
 	queue_free()
