@@ -19,8 +19,9 @@ enum PlayerMode {
 @onready var area_2d = $Area2D
 
 @export_group("Locomotion")
-@export var RUN_SPEED_DAMPING = 0.5
-@export var SPEED = 200.0
+@export var RUN_SPEED_DAMPING = 0.8
+@export var SPEED = 100.0
+@export var SPEED_HIGH = 250.0
 @export var JUMP_VELOCITY = -350
 @export_group("")
 
@@ -48,7 +49,10 @@ func _physics_process(delta):
 	var direction = Input.get_axis("left", "right")
 	if direction:
 		# 使用线性插值让速度逐步上升
-		velocity.x = lerpf(velocity.x, SPEED * direction, RUN_SPEED_DAMPING * delta)
+		if (Input.is_action_pressed("action")):
+			velocity.x = lerpf(velocity.x, SPEED_HIGH * direction, RUN_SPEED_DAMPING * delta)
+		else:
+			velocity.x = lerpf(velocity.x, SPEED * direction, RUN_SPEED_DAMPING * delta)
 	else:
 		# 速度缓慢变化模拟移动惯性
 		velocity.x = move_toward(velocity.x, 0, SPEED * delta)
