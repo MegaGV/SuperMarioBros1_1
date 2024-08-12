@@ -17,10 +17,11 @@ enum PlayerMode {
 @onready var area_collision_shape = $Area2D/AreaCollisionShape2D
 @onready var body_collision_shape = $BodyCollisionShape2D
 @onready var area_2d = $Area2D
+#@onready var ray_cast_2d = $RayCast2D
 
 @export_group("Locomotion")
 @export var RUN_SPEED_DAMPING = 0.8
-@export var SPEED = 100.0
+@export var SPEED = 150.0
 @export var SPEED_HIGH = 250.0
 @export var JUMP_VELOCITY = -350
 @export_group("")
@@ -46,7 +47,8 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("left", "right")
+	# 兼容键盘和手柄的方案
+	var direction = Input.get_action_strength("right") - Input.get_action_strength("left")
 	if direction:
 		# 使用线性插值让速度逐步上升
 		if (Input.is_action_pressed("action")):
@@ -59,6 +61,20 @@ func _physics_process(delta):
 
 	# play animaiton
 	animated_sprite_2d.trigger_animation(velocity, direction, player_mode)
+	
+	#if ray_cast_2d.is_colliding():
+		#var collider = $RayCast2D.get_collider()
+		#if collider is TileMap:
+			#var tilemap = collider as TileMap
+			#var tile_location = $RayCast2D.get_collision_point()
+			#var tile_location2 = tilemap.local_to_map(tile_location)
+			#tile_location2.y -= 1
+			#var tile_data = tilemap.get_cell_tile_data(0, tile_location2)
+			#if tile_data:
+				#print(tile_data.get_custom_data("can_be_bumped"))
+			#print(tile_location,tile_location2)
+
+	#get_node("../TileMap").set_cell(0, Vector2(16,8),0,Vector2(4,1))
 	
 	move_and_slide()
 
