@@ -73,8 +73,9 @@ func _physics_process(delta):
 			#if tile_data:
 				#print(tile_data.get_custom_data("can_be_bumped"))
 			#print(tile_location,tile_location2)
-
 	#get_node("../TileMap").set_cell(0, Vector2(16,8),0,Vector2(4,1))
+	
+	handle_movement_collision(get_last_slide_collision())	
 	
 	move_and_slide()
 
@@ -99,12 +100,19 @@ func handle_enemy_collision(enemyArea: Area2D):
 	else:
 		affected()
 
+func handle_movement_collision(collison: KinematicCollision2D):
+	if collison == null:
+		return
+	if collison.get_collider() is Block:
+		var angle_of_collision = rad_to_deg(collison.get_angle())
+		if roundf(angle_of_collision) == 180:
+			collison.get_collider().bump(player_mode)
+
 # 踩怪头，弹起来一点点
 func on_enemy_stomped():
 	velocity.y = STOMP_Y_VELOCITY
 
 func affected():
-	print("you died")
 	if player_mode == PlayerMode.BIG:
 		pass
 	elif player_mode == PlayerMode.FIRE:

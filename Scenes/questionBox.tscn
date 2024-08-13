@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://42hfyajguclg"]
+
+[ext_resource type="Texture2D" uid="uid://d2w3n05nyi58y" path="res://Assets/sprites/brick/questionBox1.png" id="1_hmpfj"]
+[ext_resource type="Script" path="res://Scripts/questionBox.gd" id="1_v3fgb"]
+[ext_resource type="Texture2D" uid="uid://vvwqeqoyn8y4" path="res://Assets/sprites/brick/questionBox2.png" id="2_5ig8e"]
+[ext_resource type="Texture2D" uid="uid://cl6gdxu5qqtoe" path="res://Assets/sprites/brick/questionBox3.png" id="3_b3bvg"]
+[ext_resource type="Texture2D" uid="uid://kkfnc40siqmv" path="res://Assets/sprites/brick/questionBox4.png" id="4_q35et"]
+[ext_resource type="Texture2D" uid="uid://brr0g1cyg0h61" path="res://Assets/sprites/brick/brick.png" id="6_7p5ta"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dd137"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7p5ta")
+}],
+"loop": true,
+"name": &"brick",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": ExtResource("1_hmpfj")
+}, {
+"duration": 2.0,
+"texture": ExtResource("2_5ig8e")
+}, {
+"duration": 2.0,
+"texture": ExtResource("3_b3bvg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_q35et")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8wqc"]
+size = Vector2(16, 16)
+
+[node name="QuestionBox" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_v3fgb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dd137")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s8wqc")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+scale = Vector2(2.5, 1)
+target_position = Vector2(0, -14)
+collision_mask = 4
