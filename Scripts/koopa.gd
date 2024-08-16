@@ -21,7 +21,7 @@ func move(delta):
 	position.x += direction * delta * speed_x
 
 func stomped(playerPosition : Vector2):
-	ScoreUtils.spawn_points_label(area_2d, 100)
+	SpawnUtils.spawn_text_label(area_2d.global_position, 100)
 	if (in_shell):
 		if (speed_x == 0):
 			launch(playerPosition)

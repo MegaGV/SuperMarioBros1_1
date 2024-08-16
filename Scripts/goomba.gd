@@ -20,7 +20,7 @@ func stomped(_playerPosition : Vector2):
 	update_collision_shape(GOOMBA_FLAT_COLLISION_SHAPE, GOOMBA_FLAT_COLLISION_SHAPE_POSITION)
 	animated_sprite_2d.play("death")
 	death()
-	ScoreUtils.spawn_points_label(area_2d, 100)
+	SpawnUtils.spawn_text_label(area_2d.global_position, 100)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()

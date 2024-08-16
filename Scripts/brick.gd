@@ -6,4 +6,5 @@ func bump(player_mode: Player.PlayerMode):
 	if player_mode == Player.PlayerMode.SMALL:
 		bump_up()
 	else:
-		pass
+		# animation to do
+		queue_free()

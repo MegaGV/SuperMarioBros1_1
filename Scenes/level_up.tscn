@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctd16ehspvb36"]
+
+[ext_resource type="Script" path="res://Scripts/LevelUp.gd" id="1_x5q7g"]
+[ext_resource type="Texture2D" uid="uid://gdej4ju0kkjt" path="res://Assets/sprites/item/mushroom1.png" id="2_41hgv"]
+[ext_resource type="Texture2D" uid="uid://c4gxxjfmsnm2m" path="res://Assets/sprites/item/flower1.png" id="3_enkxf"]
+[ext_resource type="Texture2D" uid="uid://0q4ljh64u73j" path="res://Assets/sprites/item/flower2.png" id="4_lxle4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fakxt"]
+size = Vector2(14, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o1fyo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_41hgv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_enkxf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lxle4")
+}],
+"loop": true,
+"name": &"flower",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g5i17"]
+size = Vector2(14, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wfp5"]
+size = Vector2(1, 15)
+
+[node name="LevelUp" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_x5q7g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fakxt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o1fyo")
+autoplay = "default"
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_g5i17")
+target_position = Vector2(0, 8)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="ShapeCast2D2" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_7wfp5")
+target_position = Vector2(8, 0)
+collision_mask = 2

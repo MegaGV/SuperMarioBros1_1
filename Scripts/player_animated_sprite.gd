@@ -17,5 +17,27 @@ func trigger_animation(velocity: Vector2, direction: int, player_mode: Player.Pl
 	else:
 		play("%s_idle" % mode)
 		
-	
 
+func _on_animation_finished():
+	if animation.contains("to"):
+		reset_player_properties()
+
+func reset_player_properties():
+	offset = Vector2.ZERO
+	get_parent().set_physics_process(true)
+	get_parent().set_collision_layer_value(1, true)
+	get_parent().area_2d.set_collision_layer_value(1, true)
+
+
+func _on_frame_changed():
+	if animation == "small_to_big":
+		var mode = get_parent().player_mode
+		if (frame % 2):
+			offset = Vector2(0, 0 if mode == Player.PlayerMode.SMALL else -8)
+		else:
+			offset = Vector2(0, 0 if mode != Player.PlayerMode.SMALL else -8)
+	elif animation.contains("to_small"):
+		if (frame % 2):
+			offset = Vector2(0,8)
+		else:
+			offset = Vector2(0,0)

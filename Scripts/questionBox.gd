@@ -38,10 +38,13 @@ func bonusOut(player_mode: Player.PlayerMode):
 	match bonus_array.pop_back():
 		BonusType.COIN:
 			print("coin")
+			SpawnUtils.spawn_coin(position)
 		BonusType.LEVELUP:
 			print("levelup")
+			SpawnUtils.spawn_level_up(position, player_mode)
 		BonusType.ONEUP:
 			print("oneup")
+			SpawnUtils.spawn_one_up(position, player_mode)
 		BonusType.STAR:
 			print("star")
 

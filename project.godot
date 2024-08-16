@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ScoreUtils="*res://Scripts/score.gd"
+SpawnUtils="*res://Scripts/spawnUtils.gd"
 
 [display]
 

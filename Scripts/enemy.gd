@@ -40,7 +40,7 @@ func killed(killerPosition: Vector2):
 	animated_sprite_2d.stop()
 	scale.y = -scale.y
 	death()
-	ScoreUtils.spawn_points_label(area_2d, 100)
+	SpawnUtils.spawn_text_label(area_2d.global_position, 100)
 
 func death():
 	set_collision_layer_value(3, false)

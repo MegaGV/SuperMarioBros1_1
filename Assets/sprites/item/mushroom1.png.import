@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjomb4loc5wr2"
-path="res://.godot/imported/mashroom2.png-92b3d4df78e80cbd0d5756c376bb908c.ctex"
+uid="uid://gdej4ju0kkjt"
+path="res://.godot/imported/mushroom1.png-7d4738a1cb69bd165cb1d6a11f90b5eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/item/mashroom2.png"
-dest_files=["res://.godot/imported/mashroom2.png-92b3d4df78e80cbd0d5756c376bb908c.ctex"]
+source_file="res://Assets/sprites/item/mushroom1.png"
+dest_files=["res://.godot/imported/mushroom1.png-7d4738a1cb69bd165cb1d6a11f90b5eb.ctex"]
 
 [params]
 

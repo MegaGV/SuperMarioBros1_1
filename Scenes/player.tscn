@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_uinwr"]
 [ext_resource type="Texture2D" uid="uid://dy7vn1m3ih2dw" path="res://Assets/sprites/mario/big_mario_idle.png" id="2_xhmun"]
-[ext_resource type="Shape2D" uid="uid://drur7mdf2b3jt" path="res://Resource/CollisionShapes/small_mario_collision_shape.tres" id="3_02ep1"]
 [ext_resource type="Texture2D" uid="uid://dmtwt5l4fk11f" path="res://Assets/sprites/mario/big_mario_jump.png" id="3_co5kr"]
 [ext_resource type="Texture2D" uid="uid://bf47k78idhtts" path="res://Assets/sprites/mario/big_mario_run1.png" id="4_jeox8"]
 [ext_resource type="Texture2D" uid="uid://cvayclyvfohw1" path="res://Assets/sprites/mario/fire_mario_idle.png" id="4_u128a"]
@@ -24,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://cusry6gjtsuhu" path="res://Assets/sprites/mario/small_mario_run3.png" id="20_ctu6w"]
 [ext_resource type="Texture2D" uid="uid://cjqo82gvgajwn" path="res://Assets/sprites/mario/small_mario_slide.png" id="21_08n0v"]
 [ext_resource type="Script" path="res://Scripts/player_animated_sprite.gd" id="23_riqs1"]
+[ext_resource type="Shape2D" uid="uid://drur7mdf2b3jt" path="res://Resource/CollisionShapes/mario_small_collision_shape.tres" id="24_ffdnc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ps0op"]
 animations = [{
@@ -98,9 +98,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_u128a")
 }],
-"loop": true,
+"loop": false,
 "name": &"big_to_fire",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -127,9 +127,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_opcue")
 }],
-"loop": true,
+"loop": false,
 "name": &"big_to_small",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -208,6 +208,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("4_u128a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_opcue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u128a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_opcue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u128a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_opcue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u128a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_opcue")
+}],
+"loop": false,
+"name": &"fire_to_small",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("13_ahyy5")
 }],
 "loop": true,
@@ -277,9 +306,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_xhmun")
 }],
-"loop": true,
+"loop": false,
 "name": &"small_to_big",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -289,16 +318,17 @@ script = ExtResource("1_uinwr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ps0op")
 animation = &"small_idle"
-frame_progress = 0.130793
 script = ExtResource("23_riqs1")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 12
 
 [node name="AreaCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = ExtResource("3_02ep1")
+shape = ExtResource("24_ffdnc")
 
 [node name="BodyCollisionShape2D" type="CollisionShape2D" parent="."]
-shape = ExtResource("3_02ep1")
+shape = ExtResource("24_ffdnc")
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

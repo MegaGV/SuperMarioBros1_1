@@ -5,6 +5,9 @@ class_name Player
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+const SMALL_COLLISION_SHAPE = preload("res://Resource/CollisionShapes/mario_small_collision_shape.tres")
+const BIG_COLLISION_SHAPE = preload("res://Resource/CollisionShapes/mario_big_collision_shape.tres")
+
 enum PlayerMode {
 	SMALL,
 	BIG,
@@ -14,8 +17,8 @@ enum PlayerMode {
 #signal points_scored(points: int)
 
 @onready var animated_sprite_2d = $AnimatedSprite2D as PlayerAnimatedSprite
-@onready var area_collision_shape = $Area2D/AreaCollisionShape2D
-@onready var body_collision_shape = $BodyCollisionShape2D
+@onready var area_collision_shape_2d = $Area2D/AreaCollisionShape2D
+@onready var body_collision_shape_2d = $BodyCollisionShape2D
 @onready var area_2d = $Area2D
 #@onready var ray_cast_2d = $RayCast2D
 
@@ -27,8 +30,8 @@ enum PlayerMode {
 @export_group("")
 
 @export_group("Stomping enemies")
-@export var MIN_STOMP_DEGREE = 35
-@export var MAX_STOMP_DEGREE = 145
+@export var MIN_STOMP_DEGREE = 50
+@export var MAX_STOMP_DEGREE = 130
 @export var STOMP_Y_VELOCITY = -200
 @export_group("")
 
@@ -77,13 +80,18 @@ func _physics_process(delta):
 	
 	handle_movement_collision(get_last_slide_collision())	
 	
+	if position.y > 250:
+		get_tree().reload_current_scene()
+	
 	move_and_slide()
 
 func _on_area_2d_area_entered(area):
 	if is_dead:
 		return
-	if area.get_parent() is Enemy: # Area2D->Koopa
+	if area.get_parent() is Enemy:
 		handle_enemy_collision(area)
+	elif area is Bonus:
+		handle_bonus_collision(area)
 
 func handle_enemy_collision(enemyArea: Area2D):
 	# 计算两者的角度 rad_to_deg将弧度转换为度数,angle_to_point 函数计算从当前对象的位置到指定点的角度（弧度值）
@@ -108,20 +116,44 @@ func handle_movement_collision(collison: KinematicCollision2D):
 		if roundf(angle_of_collision) == 180:
 			collison.get_collider().bump(player_mode)
 
+func handle_bonus_collision(bonusArea: Area2D):
+	bonusArea.queue_free()
+	if bonusArea is LevelUp:
+		level_up(true)
+	elif bonusArea is OneUp:
+		get_life(bonusArea)
+
+func level_up(upgrade: bool):
+	set_physics_process(false)
+	set_collision_layer_value(1, false)
+	area_2d.set_collision_layer_value(1, false)
+	if upgrade:
+		if player_mode == PlayerMode.SMALL:
+			player_mode = PlayerMode.BIG
+			animated_sprite_2d.play("small_to_big")
+		elif player_mode == PlayerMode.BIG:
+			player_mode = PlayerMode.FIRE
+			animated_sprite_2d.play("big_to_fire")
+	else:
+		var before = player_mode
+		player_mode = PlayerMode.SMALL
+		animated_sprite_2d.play("big_to_small" if before == PlayerMode.BIG else "fire_to_small")
+	update_collision_shape(SMALL_COLLISION_SHAPE if player_mode == PlayerMode.SMALL else BIG_COLLISION_SHAPE, null)
+
+func get_life(bonusArea: Area2D):
+	SpawnUtils.spawn_text_label(bonusArea.global_position, "1UP")
+	pass
+
 # 踩怪头，弹起来一点点
 func on_enemy_stomped():
 	velocity.y = STOMP_Y_VELOCITY
 
 func affected():
-	if player_mode == PlayerMode.BIG:
-		pass
-	elif player_mode == PlayerMode.FIRE:
-		pass
-	else: # small
+	if player_mode == PlayerMode.SMALL:
 		is_dead = true
 		animated_sprite_2d.play("death")
 		set_physics_process(false)
-		area_2d.set_collision_layer_value(1, false)
+		#area_2d.set_collision_layer_value(1, false)
 		
 		# play death move
 		var death_tween = get_tree().create_tween()
@@ -129,3 +161,12 @@ func affected():
 		death_tween.chain().tween_property(self, "position", position + Vector2(0, 256), 1)
 		# after death reset game
 		death_tween.tween_callback(func (): get_tree().reload_current_scene())
+	else:
+		level_up(false)
+
+func update_collision_shape(newShape,newPos):
+	body_collision_shape_2d.set_deferred("shape", newShape)
+	area_collision_shape_2d.set_deferred("shape", newShape)
+	if newPos != null:
+		body_collision_shape_2d.set_deferred("position", newPos)
+		area_collision_shape_2d.set_deferred("position", newPos)
