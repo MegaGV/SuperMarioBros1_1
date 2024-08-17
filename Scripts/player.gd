@@ -7,6 +7,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 const SMALL_COLLISION_SHAPE = preload("res://Resource/CollisionShapes/mario_small_collision_shape.tres")
 const BIG_COLLISION_SHAPE = preload("res://Resource/CollisionShapes/mario_big_collision_shape.tres")
+const BIG_SQUAT_COLLISION_SHAPE = preload("res://Resource/CollisionShapes/mario_big_squat_collision_shape.tres")
 
 enum PlayerMode {
 	SMALL,
@@ -64,6 +65,12 @@ func _physics_process(delta):
 		# 速度缓慢变化模拟移动惯性
 		velocity.x = move_toward(velocity.x, 0, SPEED * delta)
 	
+	if is_squat:
+		update_collision_shape(BIG_SQUAT_COLLISION_SHAPE, Vector2(0,4))
+		velocity.x = move_toward(velocity.x, 0, SPEED * delta)
+	elif player_mode != PlayerMode.SMALL:
+		update_collision_shape(BIG_COLLISION_SHAPE, Vector2.ZERO)
+	
 	if is_fire:
 		shoot()
 	
@@ -83,7 +90,7 @@ func _on_area_2d_area_entered(area):
 	if area.get_parent() is Enemy:
 		handle_enemy_collision(area)
 	elif area is Bonus:
-		handle_bonus_collision(area)
+		area.get_bonus()
 
 func handle_enemy_collision(enemyArea: Area2D):
 	# 计算两者的角度 rad_to_deg将弧度转换为度数,angle_to_point 函数计算从当前对象的位置到指定点的角度（弧度值）
@@ -93,7 +100,7 @@ func handle_enemy_collision(enemyArea: Area2D):
 	var enemy = enemyArea.get_parent()
 	if angle_of_collision > MIN_STOMP_DEGREE && angle_of_collision < MAX_STOMP_DEGREE:
 		enemy.stomped(position)
-		on_enemy_stomped()
+		velocity.y = STOMP_Y_VELOCITY
 	# 碰到静止的壳状态的乌龟，龟壳发射
 	elif enemy is Koopa && enemy.is_reachable(): 
 		enemy.launch(position)
@@ -108,40 +115,30 @@ func handle_movement_collision(collison: KinematicCollision2D):
 		if roundf(angle_of_collision) == 180:
 			collison.get_collider().bump(player_mode)
 
-func handle_bonus_collision(bonusArea: Area2D):
-	bonusArea.queue_free()
-	bonusArea.get_bonus()
-
 func level_up(upgrade: bool):
-	set_physics_process(false)
-	set_collision_layer_value(1, false)
-	area_2d.set_collision_layer_value(1, false)
 	if upgrade:
 		if player_mode == PlayerMode.SMALL:
+			pre_update_collision_shape()
 			player_mode = PlayerMode.BIG
 			animated_sprite_2d.play("small_to_big")
 		elif player_mode == PlayerMode.BIG:
+			pre_update_collision_shape()
 			player_mode = PlayerMode.FIRE
 			animated_sprite_2d.play("big_to_fire")
+		else:
+			SpawnUtils.spawn_text_label(position, 100)
 	else:
+		pre_update_collision_shape()
 		var before = player_mode
 		player_mode = PlayerMode.SMALL
 		animated_sprite_2d.play("big_to_small" if before == PlayerMode.BIG else "fire_to_small")
-	update_collision_shape(SMALL_COLLISION_SHAPE if player_mode == PlayerMode.SMALL else BIG_COLLISION_SHAPE, null)
-
-func get_life(bonusArea: Area2D):
-	SpawnUtils.spawn_text_label(bonusArea.global_position, "1UP")
-
-# 踩怪头，弹起来一点点
-func on_enemy_stomped():
-	velocity.y = STOMP_Y_VELOCITY
+	update_collision_shape(SMALL_COLLISION_SHAPE if player_mode == PlayerMode.SMALL else BIG_COLLISION_SHAPE, Vector2.ZERO)
 
 func affected():
 	if player_mode == PlayerMode.SMALL:
 		is_dead = true
 		animated_sprite_2d.play("death")
 		set_physics_process(false)
-		#area_2d.set_collision_layer_value(1, false)
 		
 		# play death move
 		var death_tween = get_tree().create_tween()
@@ -156,8 +153,13 @@ func shoot():
 	var direction = animated_sprite_2d.scale.x
 	var pos = shooting_point.global_position
 	if direction == -1:
-		pos.x -= 14
+		pos.x -= shooting_point.position.x * 2
 	SpawnUtils.spawn_fire_ball(pos, direction)
+
+func pre_update_collision_shape():
+	set_physics_process(false)
+	set_collision_layer_value(1, false)
+	area_2d.set_collision_layer_value(1, false)
 
 func update_collision_shape(newShape,newPos):
 	body_collision_shape_2d.set_deferred("shape", newShape)

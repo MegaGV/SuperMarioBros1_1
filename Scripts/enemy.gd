@@ -5,10 +5,10 @@ class_name Enemy
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-const DEFAULT_X_SPEED = 20
-const KILL_Y_VELOCITY = -200
+const DEFAULT_SPEED_X = 20
+const KILL_VELOCITY_Y = -200
 
-@export var speed_x = 20
+@export var speed_x = 0
 @export var speed_y = 0
 @export var direction = -1
 
@@ -17,11 +17,16 @@ const KILL_Y_VELOCITY = -200
 @onready var body_collision_shape_2d = $BodyCollisionShape2D
 @onready var area_collision_shape_2d = $Area2D/AreaCollisionShape2D
 
+var start = false
+
 func _ready():
-	speed_x = DEFAULT_X_SPEED
+	pass
 
 func _process(delta):
-	pass
+	var player_position = get_node("../../Player").global_position
+	if !start && position.x - player_position.x <= 256:
+		speed_x = DEFAULT_SPEED_X
+		start = true
 
 func stomped(playerPosition : Vector2):
 	pass
@@ -35,7 +40,7 @@ func basic_move(delta):
 
 func killed(killerPosition: Vector2):
 	direction = -1 if killerPosition.x >= position.x else 1
-	velocity.y = KILL_Y_VELOCITY
+	velocity.y = KILL_VELOCITY_Y
 	set_collision_mask_value(2, false)
 	animated_sprite_2d.stop()
 	scale.y = -scale.y

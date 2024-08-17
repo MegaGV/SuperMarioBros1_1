@@ -19,4 +19,4 @@ func check_top():
 	if raycast_2d.is_colliding() && raycast_2d.get_collider() is Enemy:
 		raycast_2d.get_collider().killed(position)
 	if raycast_2d.is_colliding() && raycast_2d.get_collider() is Bonus:
-		raycast_2d.get_collider().bump_up()
+		raycast_2d.get_collider().bump_up(position)

@@ -8,6 +8,7 @@ const COIN_SCENE = preload("res://Scenes/coin.tscn")
 const LEVEL_UP_SCENE = preload("res://Scenes/level_up.tscn")
 const ONE_UP_SCENE = preload("res://Scenes/one_up.tscn")
 const FIRE_BALL_SCENE = preload("res://Scenes/fire_ball.tscn")
+const EXPLOSION_SCENE = preload("res://Scenes/explosion.tscn")
 
 func spawn_text_label(textPos: Vector2, text):
 	var spawner = POINTS_LABEL_SCENE.instantiate()
@@ -45,4 +46,9 @@ func spawn_fire_ball(spawnPosition: Vector2, direction: int):
 	var spawner = FIRE_BALL_SCENE.instantiate()
 	spawner.position = spawnPosition
 	spawner.direction = direction
+	get_tree().root.add_child(spawner)
+
+func spawn_explosion(spawnPosition: Vector2):
+	var spawner = EXPLOSION_SCENE.instantiate()
+	spawner.position = spawnPosition
 	get_tree().root.add_child(spawner)

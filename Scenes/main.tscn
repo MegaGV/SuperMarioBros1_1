@@ -34,10 +34,55 @@ position = Vector2(53, 200)
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Goomba" parent="Enemies" instance=ExtResource("7_w0rc7")]
-position = Vector2(556, 200)
+position = Vector2(345, 200)
+
+[node name="Goomba2" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(677, 200)
+
+[node name="Goomba3" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(833, 200)
+
+[node name="Goomba4" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(817, 200)
+
+[node name="Goomba5" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(1336, 72)
+
+[node name="Goomba6" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(1288, 72)
+
+[node name="Goomba7" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(1560, 200)
+
+[node name="Goomba8" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(1576, 200)
 
 [node name="Koopa" parent="Enemies" instance=ExtResource("8_sqbm3")]
-position = Vector2(529, 198)
+position = Vector2(1704, 198)
+
+[node name="Goomba9" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(1847, 200)
+
+[node name="Goomba10" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(1878, 200)
+
+[node name="Goomba11" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(2006, 200)
+
+[node name="Goomba12" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(2030, 200)
+
+[node name="Goomba13" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(2091, 200)
+
+[node name="Goomba14" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(2115, 200)
+
+[node name="Goomba15" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(2829, 200)
+
+[node name="Goomba16" parent="Enemies" instance=ExtResource("7_w0rc7")]
+position = Vector2(2853, 200)
 
 [node name="Bricks" type="Node" parent="."]
 
@@ -136,7 +181,6 @@ position = Vector2(376, 152)
 
 [node name="QuestionBox3" parent="QuestionBoxs" instance=ExtResource("8_r4t3o")]
 position = Vector2(264, 152)
-bonus_array = [1]
 
 [node name="QuestionBox4" parent="QuestionBoxs" instance=ExtResource("8_r4t3o")]
 position = Vector2(360, 88)
@@ -148,6 +192,7 @@ bonus_status = 2
 
 [node name="QuestionBox6" parent="QuestionBoxs" instance=ExtResource("8_r4t3o")]
 position = Vector2(1256, 152)
+bonus_array = [1]
 
 [node name="QuestionBox7" parent="QuestionBoxs" instance=ExtResource("8_r4t3o")]
 position = Vector2(1512, 88)
@@ -167,6 +212,7 @@ position = Vector2(1704, 152)
 
 [node name="QuestionBox11" parent="QuestionBoxs" instance=ExtResource("8_r4t3o")]
 position = Vector2(1752, 88)
+bonus_array = [1]
 
 [node name="QuestionBox12" parent="QuestionBoxs" instance=ExtResource("8_r4t3o")]
 position = Vector2(1800, 152)

@@ -7,8 +7,8 @@ const KOOPA_NORMAL_COLLISION_SHAPE = preload("res://Resource/CollisionShapes/koo
 const KOOPA_SHELL_COLLISION_SHAPE_POSITION = Vector2(0, -2)
 const KOOPA_NORMAL_COLLISION_SHAPE_POSITON = Vector2(0, 0)
 
-const STOMP_Y_VELOCITY = -50
-const SHELL_X_SPEED = 250
+const STOMP_VELOCITY_Y = -50
+const SHELL_SPEED = 250
 
 var in_shell = false
 
@@ -32,21 +32,21 @@ func stomped(playerPosition : Vector2):
 
 func launch(playerPosition : Vector2):
 	direction = -1 if playerPosition.x > global_position.x else 1
-	speed_x = SHELL_X_SPEED
+	speed_x = SHELL_SPEED
 
 func toShell():
 	update_collision_shape(KOOPA_SHELL_COLLISION_SHAPE, KOOPA_SHELL_COLLISION_SHAPE_POSITION)
 	animated_sprite_2d.play("shell")
 	speed_x = 0
-	velocity.y = STOMP_Y_VELOCITY
+	velocity.y = STOMP_VELOCITY_Y
 	in_shell = true
 	area_2d.set_collision_mask_value(3, true)
 
 func backToNormal():
-	velocity.y = STOMP_Y_VELOCITY
+	velocity.y = STOMP_VELOCITY_Y
 	update_collision_shape(KOOPA_NORMAL_COLLISION_SHAPE, KOOPA_NORMAL_COLLISION_SHAPE_POSITON)
 	animated_sprite_2d.play("walk")
-	speed_x = DEFAULT_X_SPEED
+	speed_x = DEFAULT_SPEED_X
 	in_shell = false
 	area_2d.set_collision_mask_value(3, false)
 

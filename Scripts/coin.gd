@@ -14,3 +14,9 @@ func spawn():
 	coin_tween.tween_property(self, "position", position + Vector2(0 ,-40), .3)
 	coin_tween.tween_callback(queue_free)
 	SpawnUtils.spawn_text_label(self.global_position, 100)
+
+func bump_up(pos: Vector2):
+	pass
+
+func get_bonus():
+	super.get_bonus()

@@ -39,13 +39,17 @@ func _process(delta):
 			shape_cast_2d_x.target_position.x = -shape_cast_2d_x.target_position.x
 		position.x += speed_x * delta
 
-
-func bump_up():
+func bump_up(pos: Vector2):
 	var bump_tween = get_tree().create_tween()
-	bump_tween.tween_property(self, "position", position + Vector2(0, -20), .2)
-
+	if pos.x > global_position.x:
+		bump_tween.tween_property(self, "position", position + Vector2(10, -20), .2)
+		speed_x = abs(speed_x)
+	else:
+		bump_tween.tween_property(self, "position", position + Vector2(-10, -20), .2)
+		speed_x = -abs(speed_x)
 
 func get_bonus():
+	super.get_bonus()
 	get_tree().get_first_node_in_group("player").level_up(true)
 
 

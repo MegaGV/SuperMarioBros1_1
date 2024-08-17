@@ -20,29 +20,24 @@ func _exit_tree():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position.x += delta * speed_x * direction
 	if ray_cast_2d.is_colliding():
-		#print(ray_cast_2d.get_collider())
 		moving_up = true
 		order_change_pos = position
-	
-	position.y += delta * speed_y * 1 if !moving_up else -1
 	if moving_up:
 		if order_change_pos.y - amplitude >= position.y:
 			moving_up = false
+	position.x += delta * speed_x * direction
+	position.y += delta * speed_y * 1 if !moving_up else -1
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
-
 
 func _on_area_entered(area):
 	if area.get_parent() is Enemy:
 		area.get_parent().killed(global_position)
 	queue_free()
 
-
 func _on_body_entered(body):
-	print(body)
+	SpawnUtils.spawn_explosion(global_position)
 	queue_free()
-	pass

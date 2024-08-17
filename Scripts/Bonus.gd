@@ -3,7 +3,7 @@ extends Area2D
 class_name Bonus
 
 func get_bonus():
-	pass
+	queue_free()
 
-func bump_up():
+func bump_up(pos: Vector2):
 	pass

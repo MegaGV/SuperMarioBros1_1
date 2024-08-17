@@ -45,9 +45,7 @@ func reset_player_properties():
 
 
 func _on_frame_changed():
-	if animation.contains("squat"):
-		offset = Vector2(0,4)
-	elif animation == "small_to_big":
+	if animation == "small_to_big":
 		var mode = get_parent().player_mode
 		if (frame % 2):
 			offset = Vector2(0, 0 if mode == Player.PlayerMode.SMALL else -8)
@@ -58,6 +56,4 @@ func _on_frame_changed():
 			offset = Vector2(0,8)
 		else:
 			offset = Vector2(0,0)
-	else:
-		offset = Vector2(0,0)
 
