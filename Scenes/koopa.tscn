@@ -41,7 +41,7 @@ autoplay = "walk"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 34
 
 [node name="AreaCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("5_x054g")

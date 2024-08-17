@@ -30,4 +30,16 @@ func _process(delta):
 			speed_x = -speed_x
 			shape_cast_2d_x.target_position.x = -shape_cast_2d_x.target_position.x
 		position.x += speed_x * delta
-		
+
+
+func bump_up():
+	var bump_tween = get_tree().create_tween()
+	bump_tween.tween_property(self, "position", position + Vector2(0, -20), .2)
+
+
+func get_bonus():
+	SpawnUtils.spawn_text_label(global_position, "1UP")
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()

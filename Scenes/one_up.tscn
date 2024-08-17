@@ -10,7 +10,7 @@ size = Vector2(14, 16)
 size = Vector2(14, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wewd8"]
-size = Vector2(1, 15)
+size = Vector2(1, 10)
 
 [node name="OneUp" type="Area2D"]
 collision_layer = 8
@@ -32,3 +32,7 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_wewd8")
 target_position = Vector2(8, 0)
 collision_mask = 2
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

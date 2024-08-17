@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu6u40lo2eeob"
-path="res://.godot/imported/explotion1.png-b34b6115caac0148c8e7f382a87343e8.ctex"
+uid="uid://dqxomfrqbqx4a"
+path="res://.godot/imported/mario1_1.png-c3029382ea302b2a806153b1ed7d1748.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/effect/explotion1.png"
-dest_files=["res://.godot/imported/explotion1.png-b34b6115caac0148c8e7f382a87343e8.ctex"]
+source_file="res://mario1_1.png"
+dest_files=["res://.godot/imported/mario1_1.png-c3029382ea302b2a806153b1ed7d1748.ctex"]
 
 [params]
 

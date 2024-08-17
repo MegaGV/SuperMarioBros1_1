@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bkj72hirxail7"]
+[gd_scene load_steps=27 format=3 uid="uid://bkj72hirxail7"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_uinwr"]
 [ext_resource type="Texture2D" uid="uid://dy7vn1m3ih2dw" path="res://Assets/sprites/mario/big_mario_idle.png" id="2_xhmun"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bdxmgo58w7hli" path="res://Assets/sprites/mario/fire_mario_slide.png" id="14_m0l6b"]
 [ext_resource type="Texture2D" uid="uid://colueelsloxv1" path="res://Assets/sprites/mario/small_mario_die.png" id="15_hofwp"]
 [ext_resource type="Texture2D" uid="uid://dpcvj8bfru7a0" path="res://Assets/sprites/mario/small_mario_jump.png" id="17_ji3iu"]
+[ext_resource type="Texture2D" uid="uid://djfdfg4mh8c3l" path="res://Assets/sprites/mario/fire_mario_squat.png" id="17_k6thh"]
 [ext_resource type="Texture2D" uid="uid://8jwas0y5gowe" path="res://Assets/sprites/mario/small_mario_run1.png" id="18_0iq3m"]
 [ext_resource type="Texture2D" uid="uid://diq2qifry343k" path="res://Assets/sprites/mario/small_mario_run2.png" id="19_hqcd8"]
 [ext_resource type="Texture2D" uid="uid://cusry6gjtsuhu" path="res://Assets/sprites/mario/small_mario_run3.png" id="20_ctu6w"]
@@ -179,6 +180,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("17_k6thh")
+}],
+"loop": true,
+"name": &"fire_squat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("4_u128a")
 }, {
 "duration": 1.0,
@@ -239,7 +248,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("13_ahyy5")
 }],
-"loop": true,
+"loop": false,
 "name": &"shoot",
 "speed": 10.0
 }, {
@@ -311,13 +320,13 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 2
 script = ExtResource("1_uinwr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ps0op")
-animation = &"small_idle"
+animation = &"shoot"
 script = ExtResource("23_riqs1")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -328,6 +337,9 @@ shape = ExtResource("24_ffdnc")
 
 [node name="BodyCollisionShape2D" type="CollisionShape2D" parent="."]
 shape = ExtResource("24_ffdnc")
+
+[node name="ShootingPoint" type="Marker2D" parent="."]
+position = Vector2(7, -4)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]

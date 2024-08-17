@@ -16,7 +16,7 @@ enum LEVELUP_TYPE {
 }
 
 var spawned = true
-var type = LEVELUP_TYPE.MUSHROOM
+@export var type = LEVELUP_TYPE.MUSHROOM
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -38,3 +38,16 @@ func _process(delta):
 			speed_x = -speed_x
 			shape_cast_2d_x.target_position.x = -shape_cast_2d_x.target_position.x
 		position.x += speed_x * delta
+
+
+func bump_up():
+	var bump_tween = get_tree().create_tween()
+	bump_tween.tween_property(self, "position", position + Vector2(0, -20), .2)
+
+
+func get_bonus():
+	get_tree().get_first_node_in_group("player").level_up(true)
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()
