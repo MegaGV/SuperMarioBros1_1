@@ -326,11 +326,11 @@ script = ExtResource("1_uinwr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ps0op")
-animation = &"shoot"
+animation = &"small_idle"
 script = ExtResource("23_riqs1")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_mask = 12
+collision_mask = 76
 
 [node name="AreaCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("24_ffdnc")
@@ -344,3 +344,4 @@ position = Vector2(7, -4)
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

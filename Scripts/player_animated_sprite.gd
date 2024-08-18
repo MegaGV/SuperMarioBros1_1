@@ -39,9 +39,7 @@ func _on_animation_finished():
 
 func reset_player_properties():
 	offset = Vector2.ZERO
-	get_parent().set_physics_process(true)
-	get_parent().set_collision_layer_value(1, true)
-	get_parent().area_2d.set_collision_layer_value(1, true)
+	get_parent().freeze(true)
 
 
 func _on_frame_changed():
