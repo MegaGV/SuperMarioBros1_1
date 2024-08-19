@@ -54,4 +54,3 @@ func _on_frame_changed():
 			offset = Vector2(0,8)
 		else:
 			offset = Vector2(0,0)
-

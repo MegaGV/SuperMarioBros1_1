@@ -1,8 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://bkj72hirxail7"]
+[gd_scene load_steps=33 format=3 uid="uid://bkj72hirxail7"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_uinwr"]
+[ext_resource type="Texture2D" uid="uid://dn83bacq2wrxb" path="res://Assets/sprites/mario/big_mario_climb1.png" id="2_m8dfp"]
 [ext_resource type="Texture2D" uid="uid://dy7vn1m3ih2dw" path="res://Assets/sprites/mario/big_mario_idle.png" id="2_xhmun"]
 [ext_resource type="Texture2D" uid="uid://dmtwt5l4fk11f" path="res://Assets/sprites/mario/big_mario_jump.png" id="3_co5kr"]
+[ext_resource type="Texture2D" uid="uid://ddw7dsmj8uey8" path="res://Assets/sprites/mario/big_mario_climb2.png" id="3_hmpxg"]
 [ext_resource type="Texture2D" uid="uid://bf47k78idhtts" path="res://Assets/sprites/mario/big_mario_run1.png" id="4_jeox8"]
 [ext_resource type="Texture2D" uid="uid://cvayclyvfohw1" path="res://Assets/sprites/mario/fire_mario_idle.png" id="4_u128a"]
 [ext_resource type="Texture2D" uid="uid://bljumciffyxhk" path="res://Assets/sprites/mario/big_mario_run2.png" id="5_7ntkf"]
@@ -15,19 +17,34 @@
 [ext_resource type="Texture2D" uid="uid://colju6um0fyhm" path="res://Assets/sprites/mario/fire_mario_run2.png" id="11_ibahq"]
 [ext_resource type="Texture2D" uid="uid://dg7ql6lalrt6i" path="res://Assets/sprites/mario/fire_mario_run3.png" id="12_crop3"]
 [ext_resource type="Texture2D" uid="uid://d3c7obd0v8e27" path="res://Assets/sprites/mario/fire_mario_shooting.png" id="13_ahyy5"]
+[ext_resource type="Texture2D" uid="uid://bp5hmfaivk1m" path="res://Assets/sprites/mario/fire_mario_climb1.png" id="13_sbd4v"]
 [ext_resource type="Texture2D" uid="uid://bdxmgo58w7hli" path="res://Assets/sprites/mario/fire_mario_slide.png" id="14_m0l6b"]
 [ext_resource type="Texture2D" uid="uid://colueelsloxv1" path="res://Assets/sprites/mario/small_mario_die.png" id="15_hofwp"]
+[ext_resource type="Texture2D" uid="uid://cxqe6ttd3u4dq" path="res://Assets/sprites/mario/fire_mario_climb2.png" id="15_st6eq"]
 [ext_resource type="Texture2D" uid="uid://dpcvj8bfru7a0" path="res://Assets/sprites/mario/small_mario_jump.png" id="17_ji3iu"]
 [ext_resource type="Texture2D" uid="uid://djfdfg4mh8c3l" path="res://Assets/sprites/mario/fire_mario_squat.png" id="17_k6thh"]
 [ext_resource type="Texture2D" uid="uid://8jwas0y5gowe" path="res://Assets/sprites/mario/small_mario_run1.png" id="18_0iq3m"]
 [ext_resource type="Texture2D" uid="uid://diq2qifry343k" path="res://Assets/sprites/mario/small_mario_run2.png" id="19_hqcd8"]
 [ext_resource type="Texture2D" uid="uid://cusry6gjtsuhu" path="res://Assets/sprites/mario/small_mario_run3.png" id="20_ctu6w"]
+[ext_resource type="Texture2D" uid="uid://dgv56iawsqijq" path="res://Assets/sprites/mario/small_mario_climb1.png" id="21_6o2g8"]
 [ext_resource type="Texture2D" uid="uid://cjqo82gvgajwn" path="res://Assets/sprites/mario/small_mario_slide.png" id="21_08n0v"]
 [ext_resource type="Script" path="res://Scripts/player_animated_sprite.gd" id="23_riqs1"]
 [ext_resource type="Shape2D" uid="uid://drur7mdf2b3jt" path="res://Resource/CollisionShapes/mario_small_collision_shape.tres" id="24_ffdnc"]
+[ext_resource type="Texture2D" uid="uid://b5daxyaiushi0" path="res://Assets/sprites/mario/small_mario_climb2.png" id="24_w632j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ps0op"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_m8dfp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hmpxg")
+}],
+"loop": true,
+"name": &"big_climb",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_xhmun")
@@ -138,6 +155,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_sbd4v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_st6eq")
+}],
+"loop": true,
+"name": &"fire_climb",
 "speed": 5.0
 }, {
 "frames": [{
@@ -254,6 +282,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("21_6o2g8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_w632j")
+}],
+"loop": true,
+"name": &"small_climb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_opcue")
 }],
 "loop": true,
@@ -321,6 +360,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 1
 collision_mask = 2
 script = ExtResource("1_uinwr")
 

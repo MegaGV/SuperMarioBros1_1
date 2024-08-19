@@ -8,7 +8,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 const DEFAULT_SPEED_X = 20
 const KILL_VELOCITY_Y = -200
 
-@export var speed_x = 0
+@export var speed_x = DEFAULT_SPEED_X
 @export var speed_y = 0
 @export var direction = -1
 
@@ -17,16 +17,12 @@ const KILL_VELOCITY_Y = -200
 @onready var body_collision_shape_2d = $BodyCollisionShape2D
 @onready var area_collision_shape_2d = $Area2D/AreaCollisionShape2D
 
-var start = false
 
 func _ready():
-	pass
+	set_physics_process(false)
 
 func _process(delta):
-	var player_position = get_node("../../Player").global_position
-	if !start && position.x - player_position.x <= 256:
-		speed_x = DEFAULT_SPEED_X
-		start = true
+	pass
 
 func stomped(playerPosition : Vector2):
 	pass
@@ -45,7 +41,7 @@ func killed(killerPosition: Vector2):
 	animated_sprite_2d.stop()
 	scale.y = -scale.y
 	death()
-	SpawnUtils.spawn_text_label(area_2d.global_position, 100)
+	get_tree().get_first_node_in_group("level_manager").on_score_get(100, area_2d.global_position)
 
 func death():
 	set_collision_layer_value(3, false)

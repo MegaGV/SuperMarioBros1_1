@@ -14,10 +14,11 @@ func spawn():
 	var coin_tween = get_tree().create_tween()
 	coin_tween.tween_property(self, "position", position + Vector2(0 ,-40), .3)
 	coin_tween.tween_callback(queue_free)
-	SpawnUtils.spawn_text_label(self.global_position, 100)
+	get_tree().get_first_node_in_group("level_manager").on_coin_collected(global_position)
 
 func bump_up(pos: Vector2):
 	pass
 
 func get_bonus():
 	super.get_bonus()
+	get_tree().get_first_node_in_group("level_manager").on_coin_collected()

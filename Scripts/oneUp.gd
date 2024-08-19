@@ -42,7 +42,7 @@ func bump_up(pos: Vector2):
 
 func get_bonus():
 	super.get_bonus()
-	SpawnUtils.spawn_text_label(global_position, "1UP")
+	get_tree().get_first_node_in_group("level_manager").on_get_extra_life()
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():

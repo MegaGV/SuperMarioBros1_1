@@ -25,7 +25,6 @@ func spawn_coin(spawnPosition: Vector2):
 	spawner.position = spawnPosition
 	spawner.spawned = true
 	get_tree().root.add_child(spawner)
-	get_tree().get_first_node_in_group("level_manager").on_coin_collected()
 
 func spawn_level_up(spawnPosition: Vector2, player_mode: Player.PlayerMode):
 	var spawner = LEVEL_UP_SCENE.instantiate()

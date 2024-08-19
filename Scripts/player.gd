@@ -23,7 +23,7 @@ enum PlayerMode {
 @onready var area_2d = $Area2D
 @onready var shooting_point = $ShootingPoint
 
-var RUN_SPEED_DAMPING = 0.8
+var RUN_SPEED_DAMPING = 1.2
 var SPEED = 150.0
 var SPEED_HIGH = 250.0
 var JUMP_VELOCITY = -350
@@ -38,6 +38,7 @@ var STOMP_Y_VELOCITY = -200
 
 var player_mode = PlayerMode.SMALL
 var is_dead = false
+var is_controllable = true
 var camera_left_bound : int = 0
 var transport_to : Vector2 = Vector2.ZERO
 var transport_direction : TransportArea.ENTER_DIRECTION = TransportArea.ENTER_DIRECTION.NONE
@@ -64,55 +65,59 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
+	var is_squat = 0 
+	var is_fire  = false
+	var direction = 1
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor(): # groud
 		velocity.y = JUMP_VELOCITY
 	if Input.is_action_just_released("jump") and velocity.y < 0: # jumping and released
 		velocity.y *= 0.5
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	# 兼容键盘和手柄的方案
-	var is_squat = Input.get_action_strength("down") == 1 && player_mode != Player.PlayerMode.SMALL
-	var is_fire = Input.is_action_just_pressed("action") && player_mode == Player.PlayerMode.FIRE
-	var direction = Input.get_action_strength("right") - Input.get_action_strength("left")
-	if direction:
-		# 使用线性插值让速度逐步上升
-		if (Input.is_action_pressed("action")):
-			velocity.x = lerpf(velocity.x, SPEED_HIGH * direction, RUN_SPEED_DAMPING * delta)
+	
+	if is_controllable:
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		# 兼容键盘和手柄的方案
+		is_squat = Input.get_action_strength("down") == 1 && player_mode != Player.PlayerMode.SMALL
+		is_fire = Input.is_action_just_pressed("action") && player_mode == Player.PlayerMode.FIRE
+		direction = Input.get_action_strength("right") - Input.get_action_strength("left")
+		if direction:
+			# 使用线性插值让速度逐步上升
+			if (Input.is_action_pressed("action")):
+				velocity.x = lerpf(velocity.x, SPEED_HIGH * direction, RUN_SPEED_DAMPING * delta)
+			else:
+				velocity.x = lerpf(velocity.x, SPEED * direction, RUN_SPEED_DAMPING * delta)
 		else:
-			velocity.x = lerpf(velocity.x, SPEED * direction, RUN_SPEED_DAMPING * delta)
-	else:
-		# 速度缓慢变化模拟移动惯性
-		velocity.x = move_toward(velocity.x, 0, SPEED * delta)
+			# 速度缓慢变化模拟移动惯性
+			velocity.x = move_toward(velocity.x, 0, SPEED * delta)
+		
+		if (transport_direction != TransportArea.ENTER_DIRECTION.NONE):
+			match transport_direction:
+				TransportArea.ENTER_DIRECTION.DOWN:
+					if is_on_floor() && Input.get_action_strength("down") == 1:
+						transport()
+				TransportArea.ENTER_DIRECTION.RIGHT:
+					if is_on_floor() && direction == 1:
+						transport()
+				TransportArea.ENTER_DIRECTION.UP:
+					if !is_on_floor() && Input.get_action_strength("up") == 1:
+						transport()
+				TransportArea.ENTER_DIRECTION.LEFT:
+					if is_on_floor() && direction == -1:
+						transport()
+			
+		if is_squat:
+			update_collision_shape(BIG_SQUAT_COLLISION_SHAPE, Vector2(0,4))
+			velocity.x = move_toward(velocity.x, 0, SPEED * delta)
+		elif player_mode != PlayerMode.SMALL:
+			update_collision_shape(BIG_COLLISION_SHAPE, Vector2.ZERO)
+		if is_fire:
+			shoot()
 	
-	if (transport_direction != TransportArea.ENTER_DIRECTION.NONE):
-		match transport_direction:
-			TransportArea.ENTER_DIRECTION.DOWN:
-				if is_on_floor() && Input.get_action_strength("down") == 1:
-					transport()
-			TransportArea.ENTER_DIRECTION.RIGHT:
-				if is_on_floor() && direction == 1:
-					transport()
-			TransportArea.ENTER_DIRECTION.UP:
-				if !is_on_floor() && Input.get_action_strength("up") == 1:
-					transport()
-			TransportArea.ENTER_DIRECTION.LEFT:
-				if is_on_floor() && direction == -1:
-					transport()
-	
-	if is_squat:
-		update_collision_shape(BIG_SQUAT_COLLISION_SHAPE, Vector2(0,4))
-		velocity.x = move_toward(velocity.x, 0, SPEED * delta)
-	elif player_mode != PlayerMode.SMALL:
-		update_collision_shape(BIG_COLLISION_SHAPE, Vector2.ZERO)
-	
+	# camera move
 	camera_left_bound = camera_sync.global_position.x - camera_sync.get_viewport_rect().size.x / 2 / camera_sync.zoom.x
 	if global_position.x < camera_left_bound + 8 && sign(velocity.x) == -1:
 		velocity.x = 0
-	
-	if is_fire:
-		shoot()
 	
 	# play animaiton
 	animated_sprite_2d.trigger_animation(velocity, direction, is_squat, is_fire, player_mode)
@@ -120,7 +125,7 @@ func _physics_process(delta):
 	handle_movement_collision(get_last_slide_collision())	
 	
 	if position.y > 250:
-		get_tree().reload_current_scene()
+		death()
 	
 	move_and_slide()
 
@@ -142,6 +147,10 @@ func _on_area_2d_area_entered(area):
 			transport_to = area.exitPos
 			transport_direction = area.enterDirection
 			transport_path = area.exitScenePath
+	elif area is Flag:
+		climb_flag(area)
+	elif area is Castle:
+		clear()
 
 func _on_area_2d_area_exited(area):
 	if area is TransportArea:
@@ -158,6 +167,7 @@ func handle_enemy_collision(enemyArea: Area2D):
 		velocity.y = STOMP_Y_VELOCITY
 	# 碰到静止的壳状态的乌龟，龟壳发射
 	elif enemy is Koopa && enemy.is_reachable(): 
+		get_tree().get_first_node_in_group("level_manager").on_score_get(100, position)
 		enemy.launch(position)
 	else:
 		affected()
@@ -181,7 +191,7 @@ func level_up(upgrade: bool):
 			player_mode = PlayerMode.FIRE
 			animated_sprite_2d.play("big_to_fire")
 		else:
-			SpawnUtils.spawn_text_label(position, 100)
+			get_tree().get_first_node_in_group("level_manager").on_score_get(100, position)
 	else:
 		freeze(false)
 		var before = player_mode
@@ -191,18 +201,20 @@ func level_up(upgrade: bool):
 
 func affected():
 	if player_mode == PlayerMode.SMALL:
+		death()
+	else:
+		level_up(false)
+
+func death():
 		is_dead = true
 		animated_sprite_2d.play("death")
 		set_physics_process(false)
-		
 		# play death move
 		var death_tween = get_tree().create_tween()
 		death_tween.tween_property(self, "position", position + Vector2(0, -50), 0.5)
 		death_tween.chain().tween_property(self, "position", position + Vector2(0, 256), 1)
 		# after death reset game
 		death_tween.tween_callback(func (): get_tree().reload_current_scene())
-	else:
-		level_up(false)
 
 func shoot():
 	var direction = animated_sprite_2d.scale.x
@@ -215,6 +227,7 @@ func freeze(enable: bool):
 	set_physics_process(enable)
 	set_collision_layer_value(1, enable)
 	area_2d.set_collision_layer_value(1, enable)
+	z_index = 1 if enable else 0
 
 func update_collision_shape(newShape,newPos):
 	body_collision_shape_2d.set_deferred("shape", newShape)
@@ -237,9 +250,26 @@ func transport():
 			leave_direction = Vector2(-36,0)
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", position + leave_direction, .5)
-	tween.tween_callback(func (): switch_scene())
+	tween.tween_callback(func (): get_tree().get_first_node_in_group("level_manager").switch_scene(self))
 
-func switch_scene():
-	get_tree().change_scene_to_file(transport_path)
-	SceneData.player_mode = player_mode
-	SceneData.start_point = transport_to
+func climb_flag(area: Flag):
+	freeze(false)
+	is_controllable = false
+	animated_sprite_2d.play("%s_climb" % Player.PlayerMode.keys()[player_mode].to_snake_case())
+	var tween = get_tree().create_tween()
+	var bottom_y = 192-8 if player_mode == PlayerMode.SMALL else 192-16
+	area.flag_up(position)
+	tween.tween_property(self, "position", position + Vector2(0,bottom_y - position.y), 1)
+	tween.tween_callback(func (): climb_flag2())
+
+func climb_flag2():
+	position.x += 16
+	scale.x = -1
+	await get_tree().create_timer(0.3).timeout
+	freeze(true)
+	velocity.x = 60
+	scale.x = 1
+
+func clear():
+	freeze(false)
+	animated_sprite_2d.visible = false

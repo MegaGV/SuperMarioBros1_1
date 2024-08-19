@@ -21,7 +21,7 @@ func move(delta):
 	position.x += direction * delta * speed_x
 
 func stomped(playerPosition : Vector2):
-	SpawnUtils.spawn_text_label(area_2d.global_position, 100)
+	get_tree().get_first_node_in_group("level_manager").on_score_get(100, area_2d.global_position)
 	if (in_shell):
 		if (speed_x == 0):
 			launch(playerPosition)
@@ -60,3 +60,6 @@ func _on_area_2d_area_entered(area):
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	set_physics_process(true)

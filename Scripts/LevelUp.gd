@@ -41,7 +41,7 @@ func _process(delta):
 
 func bump_up(pos: Vector2):
 	var bump_tween = get_tree().create_tween()
-	if pos.x > global_position.x:
+	if pos.x < global_position.x:
 		bump_tween.tween_property(self, "position", position + Vector2(10, -20), .2)
 		speed_x = abs(speed_x)
 	else:
