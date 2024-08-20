@@ -2,7 +2,7 @@ extends Bonus
 
 class_name OneUp
 
-@export var speed_x = 20
+@export var speed_x = 30
 @export var speed_y = 0
 @export var speed_y_max = 120
 @export var velocity_y = .1

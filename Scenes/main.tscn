@@ -237,9 +237,13 @@ position = Vector2(2760, 152)
 
 [node name="UI" parent="." instance=ExtResource("11_oppm4")]
 
-[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("ui") groups=["level_manager"]]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("ui", "timer") groups=["level_manager"]]
 script = ExtResource("9_m3svn")
 ui = NodePath("../UI")
+timer = NodePath("../Timer")
 
 [node name="LevelUp" parent="." instance=ExtResource("10_oqd30")]
 position = Vector2(37, 216)
@@ -250,7 +254,7 @@ position = Vector2(21, 216)
 type = 1
 
 [node name="TransportArea" parent="." instance=ExtResource("3_qti13")]
-position = Vector2(928, 153)
+position = Vector2(928, 147)
 exitScenePath = "res://Scenes/underground.tscn"
 
 [node name="Flag" parent="." instance=ExtResource("12_uydg6")]

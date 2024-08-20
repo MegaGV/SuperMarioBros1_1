@@ -16,18 +16,15 @@ func _process(delta: float) -> void:
 func flag_up(pos: Vector2): # flag height 128
 	var score = 100
 	var height = global_position.y - pos.y
-	if height > 110:
+	if height > 120:
 		score = 5000
-	elif height >64:
+	elif height > 64:
 		score = 2000
 	elif height > 32:
 		score = 400
 	
-	var label : Label = Label.new()
-	label.text = str(score)
-	label.position = global_position + Vector2(10,-10)
-	label.font_size = 10
-	get_tree().root.add_child(label)
+	SpawnUtils.spawn_text_label(global_position + Vector2(16,0),score, Vector2(0, -112), 1, false)
+	get_tree().get_first_node_in_group("level_manager").on_score_get(score)
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", global_position + Vector2(0,112), 1)

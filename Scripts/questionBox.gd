@@ -40,10 +40,13 @@ func bonusOut(player_mode: Player.PlayerMode):
 			SpawnUtils.spawn_coin(position)
 		BonusType.LEVELUP:
 			SpawnUtils.spawn_level_up(position, player_mode)
+			SoundManager.bonus_appear.play()
 		BonusType.ONEUP:
 			SpawnUtils.spawn_one_up(position, player_mode)
+			SoundManager.bonus_appear.play()
 		BonusType.STAR:
 			print("star")
+			SoundManager.bonus_appear.play()
 			# star item to do
 
 func empty_box_check():

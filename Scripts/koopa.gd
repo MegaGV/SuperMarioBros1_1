@@ -22,6 +22,7 @@ func move(delta):
 
 func stomped(playerPosition : Vector2):
 	get_tree().get_first_node_in_group("level_manager").on_score_get(100, area_2d.global_position)
+	SoundManager.kick.play()
 	if (in_shell):
 		if (speed_x == 0):
 			launch(playerPosition)

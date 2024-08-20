@@ -40,9 +40,11 @@ var player_mode = PlayerMode.SMALL
 var is_dead = false
 var is_controllable = true
 var camera_left_bound : int = 0
+
 var transport_to : Vector2 = Vector2.ZERO
 var transport_direction : TransportArea.ENTER_DIRECTION = TransportArea.ENTER_DIRECTION.NONE
 var transport_path : String = ""
+
 
 func _ready():
 	if SceneData.player_mode != null:
@@ -70,6 +72,7 @@ func _physics_process(delta):
 	var direction = 1
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor(): # groud
+		SoundManager.jump.play()
 		velocity.y = JUMP_VELOCITY
 	if Input.is_action_just_released("jump") and velocity.y < 0: # jumping and released
 		velocity.y *= 0.5
@@ -124,7 +127,7 @@ func _physics_process(delta):
 	
 	handle_movement_collision(get_last_slide_collision())	
 	
-	if position.y > 250:
+	if position.y > 300:
 		death()
 	
 	move_and_slide()
@@ -186,13 +189,16 @@ func level_up(upgrade: bool):
 			freeze(false)
 			player_mode = PlayerMode.BIG
 			animated_sprite_2d.play("small_to_big")
+			SoundManager.levelup.play()
 		elif player_mode == PlayerMode.BIG:
 			freeze(false)
 			player_mode = PlayerMode.FIRE
 			animated_sprite_2d.play("big_to_fire")
+			SoundManager.levelup.play()
 		else:
 			get_tree().get_first_node_in_group("level_manager").on_score_get(100, position)
 	else:
+		SoundManager.effect.play()
 		freeze(false)
 		var before = player_mode
 		player_mode = PlayerMode.SMALL
@@ -209,12 +215,14 @@ func death():
 		is_dead = true
 		animated_sprite_2d.play("death")
 		set_physics_process(false)
+		MusicManager.changeMusic("death")
 		# play death move
 		var death_tween = get_tree().create_tween()
 		death_tween.tween_property(self, "position", position + Vector2(0, -50), 0.5)
 		death_tween.chain().tween_property(self, "position", position + Vector2(0, 256), 1)
 		# after death reset game
-		death_tween.tween_callback(func (): get_tree().reload_current_scene())
+		await get_tree().create_timer(3).timeout
+		get_tree().reload_current_scene()
 
 func shoot():
 	var direction = animated_sprite_2d.scale.x
@@ -222,6 +230,7 @@ func shoot():
 	if direction == -1:
 		pos.x -= shooting_point.position.x * 2
 	SpawnUtils.spawn_fire_ball(pos, direction)
+	SoundManager.fireball.play()
 
 func freeze(enable: bool):
 	set_physics_process(enable)
@@ -248,11 +257,14 @@ func transport():
 			leave_direction = Vector2(0,-36)
 		TransportArea.ENTER_DIRECTION.LEFT:
 			leave_direction = Vector2(-36,0)
+	SoundManager.effect.play()
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", position + leave_direction, .5)
 	tween.tween_callback(func (): get_tree().get_first_node_in_group("level_manager").switch_scene(self))
 
 func climb_flag(area: Flag):
+	get_tree().get_first_node_in_group("level_manager").timer.stop()
+	MusicManager.changeMusic("flagpole")
 	freeze(false)
 	is_controllable = false
 	animated_sprite_2d.play("%s_climb" % Player.PlayerMode.keys()[player_mode].to_snake_case())
@@ -263,6 +275,7 @@ func climb_flag(area: Flag):
 	tween.tween_callback(func (): climb_flag2())
 
 func climb_flag2():
+	MusicManager.changeMusic("castle")
 	position.x += 16
 	scale.x = -1
 	await get_tree().create_timer(0.3).timeout
@@ -273,3 +286,5 @@ func climb_flag2():
 func clear():
 	freeze(false)
 	animated_sprite_2d.visible = false
+	get_tree().get_first_node_in_group("level_manager").clear()
+	get_tree().get_first_node_in_group("level_manager").timer.start()

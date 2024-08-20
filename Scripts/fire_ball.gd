@@ -36,8 +36,10 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 func _on_area_entered(area):
 	if area.get_parent() is Enemy:
 		area.get_parent().killed(global_position)
+	#SoundManager.firework.play()
 	queue_free()
 
 func _on_body_entered(body):
 	SpawnUtils.spawn_explosion(global_position)
+	#SoundManager.firework.play()
 	queue_free()

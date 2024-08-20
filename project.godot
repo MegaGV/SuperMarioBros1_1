@@ -19,6 +19,8 @@ config/icon="res://mario1_1.png"
 
 SpawnUtils="*res://Scripts/spawnUtils.gd"
 SceneData="*res://Scripts/scene_data.gd"
+MusicManager="*res://Scripts/music_manager.gd"
+SoundManager="*res://Scripts/sound_manager.gd"
 
 [display]
 

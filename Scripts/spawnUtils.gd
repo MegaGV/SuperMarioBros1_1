@@ -10,13 +10,16 @@ const ONE_UP_SCENE = preload("res://Scenes/one_up.tscn")
 const FIRE_BALL_SCENE = preload("res://Scenes/fire_ball.tscn")
 const EXPLOSION_SCENE = preload("res://Scenes/explosion.tscn")
 
-func spawn_text_label(textPos: Vector2, text):
+func spawn_text_label(textPos: Vector2, text, moveVec: Vector2 = Vector2.ZERO, duration:int = -1,  is_temp: bool = true):
 	var spawner = POINTS_LABEL_SCENE.instantiate()
-	if text is int:
-		spawner.text = str(text)
-	else:
-		spawner.text = text
+	spawner.text = text if text is not int else str(text)
 	spawner.position = textPos + Vector2(-20, -20)
+	if moveVec != Vector2.ZERO:
+		spawner.moveVec = moveVec
+	if duration != -1:
+		spawner.duration = duration
+	if is_temp != true:
+		spawner.is_temp = false
 	get_tree().root.add_child(spawner)
 	#emit_signal("points_scored", score)
 

@@ -12,6 +12,7 @@ func bump_up():
 	var bump_tween = get_tree().create_tween()
 	bump_tween.tween_property(self, "position", position + Vector2(0, -5), .12)
 	bump_tween.chain().tween_property(self, "position", position, .12)
+	SoundManager.bump.play()
 	check_top()
 
 # RayCast2D 只能检测到与它相交的第一个碰撞体,导致如果有复数目标不会都触发 

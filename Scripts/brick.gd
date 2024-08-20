@@ -13,6 +13,7 @@ func bump(player_mode: Player.PlayerMode):
 		gpu_particles_2d.emitting = true
 		set_collision_layer_value(2, false)
 		sprite_2d.visible = false
+		SoundManager.breakblock.play()
 
 func _on_gpu_particles_2d_finished():
 	queue_free()
