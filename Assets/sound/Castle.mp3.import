@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://5b3hb0iy1c3b"
-path="res://.godot/imported/CASTLE.mp3-69efa7690770059f7ea70dd9d242b6a9.mp3str"
+path="res://.godot/imported/Castle.mp3-d71049783ca8e7273e7c8974bec4feea.mp3str"
 
 [deps]
 
-source_file="res://Assets/sound/CASTLE.mp3"
-dest_files=["res://.godot/imported/CASTLE.mp3-69efa7690770059f7ea70dd9d242b6a9.mp3str"]
+source_file="res://Assets/sound/Castle.mp3"
+dest_files=["res://.godot/imported/Castle.mp3-d71049783ca8e7273e7c8974bec4feea.mp3str"]
 
 [params]
 

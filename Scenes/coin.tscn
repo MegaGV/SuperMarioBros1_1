@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://677tf5dnlixc"]
 
-[ext_resource type="Script" path="res://Scripts/Coin.gd" id="1_60shi"]
+[ext_resource type="Script" path="res://Scripts/coin.gd" id="1_60shi"]
 [ext_resource type="Texture2D" uid="uid://5sk7s3mtkw6x" path="res://Assets/sprites/item/coin5.png" id="2_at5qe"]
 [ext_resource type="Texture2D" uid="uid://dxirmtimd6bv6" path="res://Assets/sprites/item/coin1.png" id="2_rtnd7"]
 [ext_resource type="Texture2D" uid="uid://bsaoienkywrfa" path="res://Assets/sprites/item/coin6.png" id="3_8wk62"]
