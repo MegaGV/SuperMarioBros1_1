@@ -2,7 +2,7 @@ extends Node
 
 const BGM_UNDERGROUND = preload("res://Assets/sound/UNDERGROUND.mp3")
 const BGM_GROUND = preload("res://Assets/sound/GROUND.mp3")
-const BGM_CASTLE = preload("res://Assets/sound/CASTLE.mp3")
+const BGM_CASTLE = preload("res://Assets/sound/Castle.mp3")
 const BGM_DEATH = preload("res://Assets/sound/DEATH.mp3")
 const BGM_INVINCIBLE = preload("res://Assets/sound/INVINCIBLE.mp3")
 const BGM_FLAGPOLE = preload("res://Assets/sound/smb_flagpole.mp3")
