@@ -47,6 +47,7 @@ var transport_path : String = ""
 
 
 func _ready():
+    get_tree().get_first_node_in_group("level_manager").timer.start()
     if SceneData.player_mode != null:
         player_mode = SceneData.player_mode
     if SceneData.start_point != Vector2.ZERO:
@@ -216,6 +217,7 @@ func death():
         animated_sprite_2d.play("death")
         set_physics_process(false)
         MusicManager.changeMusic("death")
+        get_tree().get_first_node_in_group("level_manager").timer.stop()
         # play death move
         var death_tween = get_tree().create_tween()
         death_tween.tween_property(self, "position", position + Vector2(0, -50), 0.5)
