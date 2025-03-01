@@ -39,7 +39,7 @@ func _on_area_entered(area):
     #SoundManager.firework.play()
     queue_free()
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
     SpawnUtils.spawn_explosion(global_position)
     #SoundManager.firework.play()
     queue_free()

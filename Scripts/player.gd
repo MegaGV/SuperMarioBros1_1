@@ -133,7 +133,7 @@ func _physics_process(delta):
     
     move_and_slide()
 
-func _process(delta):
+func _process(_delta):
     # 更新相机位置
     if (should_camera_sync && global_position.x > camera_sync.global_position.x):
         camera_sync.global_position.x = global_position.x
@@ -232,7 +232,6 @@ func shoot():
     if direction == -1:
         pos.x -= shooting_point.position.x * 2
     SpawnUtils.spawn_fire_ball(pos, direction)
-    SoundManager.fireball.play()
 
 func freeze(enable: bool):
     set_physics_process(enable)

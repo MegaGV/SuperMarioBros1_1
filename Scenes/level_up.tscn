@@ -1,18 +1,28 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctd16ehspvb36"]
+[gd_scene load_steps=10 format=3 uid="uid://ctd16ehspvb36"]
 
 [ext_resource type="Script" path="res://Scripts/LevelUp.gd" id="1_x5q7g"]
-[ext_resource type="Texture2D" uid="uid://gdej4ju0kkjt" path="res://Assets/sprites/item/mushroom1.png" id="2_41hgv"]
-[ext_resource type="Texture2D" uid="uid://c4gxxjfmsnm2m" path="res://Assets/sprites/item/flower1.png" id="3_enkxf"]
-[ext_resource type="Texture2D" uid="uid://0q4ljh64u73j" path="res://Assets/sprites/item/flower2.png" id="4_lxle4"]
+[ext_resource type="Texture2D" uid="uid://d01kdny2fg4h6" path="res://Assets/sprites/marioItem.png" id="2_amt3k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fakxt"]
 size = Vector2(14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjur2"]
+atlas = ExtResource("2_amt3k")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gb8w6"]
+atlas = ExtResource("2_amt3k")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvt73"]
+atlas = ExtResource("2_amt3k")
+region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o1fyo"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_41hgv")
+"texture": SubResource("AtlasTexture_rjur2")
 }],
 "loop": true,
 "name": &"default",
@@ -20,10 +30,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_enkxf")
+"texture": SubResource("AtlasTexture_gb8w6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_lxle4")
+"texture": SubResource("AtlasTexture_kvt73")
 }],
 "loop": true,
 "name": &"flower",
@@ -46,6 +56,7 @@ shape = SubResource("RectangleShape2D_fakxt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o1fyo")
+animation = &"flower"
 autoplay = "default"
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]

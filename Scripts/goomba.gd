@@ -15,7 +15,7 @@ func move(delta):
 
 func stomped(_playerPosition : Vector2):
     speed_x = 0
-    update_collision_shape(GOOMBA_FLAT_COLLISION_SHAPE, Vector2(0, -3))
+    update_collision_shape(GOOMBA_FLAT_COLLISION_SHAPE, Vector2(0, 0))
     animated_sprite_2d.play("death")
     death()
     SoundManager.stomp.play()

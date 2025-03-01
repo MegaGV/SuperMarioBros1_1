@@ -36,7 +36,7 @@ func spawn_level_up(spawnPosition: Vector2, player_mode: Player.PlayerMode):
     spawner.position = spawnPosition
     get_tree().root.add_child(spawner)
 
-func spawn_one_up(spawnPosition: Vector2, player_mode: Player.PlayerMode):
+func spawn_one_up(spawnPosition: Vector2, _player_mode: Player.PlayerMode):
     var spawner = ONE_UP_SCENE.instantiate()
     spawner.position = spawnPosition
     get_tree().root.add_child(spawner)
@@ -45,6 +45,7 @@ func spawn_fire_ball(spawnPosition: Vector2, direction: int):
     var fire_ball_count = get_tree().get_nodes_in_group("fireballs").size()
     if (fire_ball_count >= 3):
         return
+    SoundManager.fireball.play()
     var spawner = FIRE_BALL_SCENE.instantiate()
     spawner.position = spawnPosition
     spawner.direction = direction

@@ -1,21 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://dd735dk37ip1y"]
+[gd_scene load_steps=7 format=3 uid="uid://dd735dk37ip1y"]
 
-[ext_resource type="Texture2D" uid="uid://bu6u40lo2eeob" path="res://Assets/sprites/effect/explosion1.png" id="1_he4gb"]
 [ext_resource type="Script" path="res://Scripts/explosion.gd" id="1_trs0g"]
-[ext_resource type="Texture2D" uid="uid://c14lweppvki0u" path="res://Assets/sprites/effect/explosion2.png" id="2_5cv4x"]
-[ext_resource type="Texture2D" uid="uid://eivwbbp8yfob" path="res://Assets/sprites/effect/explosion3.png" id="3_lo1he"]
+[ext_resource type="Texture2D" uid="uid://c6yfmevgcroii" path="res://Assets/sprites/marioEffect.png" id="2_p6v4r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_poyva"]
+atlas = ExtResource("2_p6v4r")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lieg"]
+atlas = ExtResource("2_p6v4r")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d34bm"]
+atlas = ExtResource("2_p6v4r")
+region = Rect2(32, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_adfps"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_he4gb")
+"texture": SubResource("AtlasTexture_poyva")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_5cv4x")
+"texture": SubResource("AtlasTexture_3lieg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_lo1he")
+"texture": SubResource("AtlasTexture_d34bm")
 }],
 "loop": false,
 "name": &"default",
@@ -28,7 +38,6 @@ script = ExtResource("1_trs0g")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_adfps")
 autoplay = "default"
-frame = 2
 frame_progress = 1.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

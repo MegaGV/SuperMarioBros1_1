@@ -4,7 +4,7 @@ class_name Koopa
 
 const KOOPA_SHELL_COLLISION_SHAPE = preload("res://Resource/CollisionShapes/koopa_shell_collision_shape.tres")
 const KOOPA_NORMAL_COLLISION_SHAPE = preload("res://Resource/CollisionShapes/koopa_normal_collision_shape.tres")
-const KOOPA_SHELL_COLLISION_SHAPE_POSITION = Vector2(0, -2)
+const KOOPA_SHELL_COLLISION_SHAPE_POSITION = Vector2(0, -6)
 const KOOPA_NORMAL_COLLISION_SHAPE_POSITON = Vector2(0, 0)
 
 const STOMP_VELOCITY_Y = -50

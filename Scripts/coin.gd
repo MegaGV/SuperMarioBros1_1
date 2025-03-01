@@ -16,7 +16,7 @@ func spawn():
     coin_tween.tween_callback(queue_free)
     get_tree().get_first_node_in_group("level_manager").on_coin_collected(global_position)
 
-func bump_up(pos: Vector2):
+func bump_up(_pos: Vector2):
     pass
 
 func get_bonus():

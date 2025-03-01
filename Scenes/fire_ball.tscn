@@ -1,28 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkhtb06x4tfya"]
+[gd_scene load_steps=9 format=3 uid="uid://bkhtb06x4tfya"]
 
-[ext_resource type="Texture2D" uid="uid://cqjuk45gknw0o" path="res://Assets/sprites/effect/fire_ball1.png" id="1_0dg3g"]
 [ext_resource type="Script" path="res://Scripts/fire_ball.gd" id="1_745wv"]
-[ext_resource type="Texture2D" uid="uid://rxtdkska3yxn" path="res://Assets/sprites/effect/fire_ball2.png" id="2_m74u4"]
-[ext_resource type="Texture2D" uid="uid://c35c4ss34borp" path="res://Assets/sprites/effect/fire_ball3.png" id="3_kx5yi"]
-[ext_resource type="Texture2D" uid="uid://bc7m0wu551r8v" path="res://Assets/sprites/effect/fire_ball4.png" id="4_cpvh5"]
+[ext_resource type="Texture2D" uid="uid://c6yfmevgcroii" path="res://Assets/sprites/marioEffect.png" id="2_n0gyc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndlmb"]
 size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kvoa"]
+atlas = ExtResource("2_n0gyc")
+region = Rect2(4, 4, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np3rb"]
+atlas = ExtResource("2_n0gyc")
+region = Rect2(20, 4, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6d5c1"]
+atlas = ExtResource("2_n0gyc")
+region = Rect2(36, 4, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lokx"]
+atlas = ExtResource("2_n0gyc")
+region = Rect2(52, 4, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_spi0w"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_0dg3g")
+"texture": SubResource("AtlasTexture_3kvoa")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_m74u4")
+"texture": SubResource("AtlasTexture_np3rb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_kx5yi")
+"texture": SubResource("AtlasTexture_6d5c1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_cpvh5")
+"texture": SubResource("AtlasTexture_4lokx")
 }],
 "loop": true,
 "name": &"default",

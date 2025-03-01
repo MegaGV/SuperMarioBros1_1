@@ -1,39 +1,56 @@
-[gd_scene load_steps=9 format=3 uid="uid://42hfyajguclg"]
+[gd_scene load_steps=11 format=3 uid="uid://42hfyajguclg"]
 
-[ext_resource type="Texture2D" uid="uid://d2w3n05nyi58y" path="res://Assets/sprites/brick/questionBox1.png" id="1_hmpfj"]
 [ext_resource type="Script" path="res://Scripts/questionBox.gd" id="1_v3fgb"]
-[ext_resource type="Texture2D" uid="uid://vvwqeqoyn8y4" path="res://Assets/sprites/brick/questionBox2.png" id="2_5ig8e"]
-[ext_resource type="Texture2D" uid="uid://cl6gdxu5qqtoe" path="res://Assets/sprites/brick/questionBox3.png" id="3_b3bvg"]
-[ext_resource type="Texture2D" uid="uid://kkfnc40siqmv" path="res://Assets/sprites/brick/questionBox4.png" id="4_q35et"]
-[ext_resource type="Texture2D" uid="uid://brr0g1cyg0h61" path="res://Assets/sprites/brick/brick.png" id="6_7p5ta"]
+[ext_resource type="Texture2D" uid="uid://b7dvfm577pr1o" path="res://Assets/sprites/tileset1.png" id="2_fhyth"]
+[ext_resource type="Texture2D" uid="uid://qos0sl8nq1fd" path="res://Assets/sprites/tileset3.png" id="3_23vfp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq57h"]
+atlas = ExtResource("2_fhyth")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r87ep"]
+atlas = ExtResource("3_23vfp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqcus"]
+atlas = ExtResource("3_23vfp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ug7yr"]
+atlas = ExtResource("3_23vfp")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhrg5"]
+atlas = ExtResource("3_23vfp")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dd137"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_7p5ta")
+"texture": SubResource("AtlasTexture_xq57h")
 }],
 "loop": true,
 "name": &"brick",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 6.0,
-"texture": ExtResource("1_hmpfj")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r87ep")
 }, {
-"duration": 2.0,
-"texture": ExtResource("2_5ig8e")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqcus")
 }, {
-"duration": 2.0,
-"texture": ExtResource("3_b3bvg")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ug7yr")
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_q35et")
+"texture": SubResource("AtlasTexture_rhrg5")
 }],
 "loop": true,
 "name": &"empty",
@@ -51,6 +68,7 @@ script = ExtResource("1_v3fgb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dd137")
+animation = &"brick"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

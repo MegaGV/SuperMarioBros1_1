@@ -1,28 +1,50 @@
-[gd_scene load_steps=11 format=3 uid="uid://677tf5dnlixc"]
+[gd_scene load_steps=12 format=3 uid="uid://677tf5dnlixc"]
 
 [ext_resource type="Script" path="res://Scripts/coin.gd" id="1_60shi"]
-[ext_resource type="Texture2D" uid="uid://5sk7s3mtkw6x" path="res://Assets/sprites/item/coin5.png" id="2_at5qe"]
-[ext_resource type="Texture2D" uid="uid://dxirmtimd6bv6" path="res://Assets/sprites/item/coin1.png" id="2_rtnd7"]
-[ext_resource type="Texture2D" uid="uid://bsaoienkywrfa" path="res://Assets/sprites/item/coin6.png" id="3_8wk62"]
-[ext_resource type="Texture2D" uid="uid://dvv8pwvwjnpu5" path="res://Assets/sprites/item/coin2.png" id="3_peoep"]
-[ext_resource type="Texture2D" uid="uid://o2ly35w0a27q" path="res://Assets/sprites/item/coin3.png" id="4_uoivp"]
-[ext_resource type="Texture2D" uid="uid://cblcakeqog2go" path="res://Assets/sprites/item/coin7.png" id="4_xow1o"]
-[ext_resource type="Texture2D" uid="uid://dc6qgwkhbuob8" path="res://Assets/sprites/item/coin4.png" id="5_lpbxu"]
+[ext_resource type="Texture2D" uid="uid://d01kdny2fg4h6" path="res://Assets/sprites/marioItem.png" id="2_hic85"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ba126"]
 size = Vector2(10, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q8qb"]
+atlas = ExtResource("2_hic85")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cayuu"]
+atlas = ExtResource("2_hic85")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xjw1"]
+atlas = ExtResource("2_hic85")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipgc7"]
+atlas = ExtResource("2_hic85")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xajca"]
+atlas = ExtResource("2_hic85")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvbwh"]
+atlas = ExtResource("2_hic85")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hu0d"]
+atlas = ExtResource("2_hic85")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0haco"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_at5qe")
+"texture": SubResource("AtlasTexture_3q8qb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_8wk62")
+"texture": SubResource("AtlasTexture_cayuu")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_xow1o")
+"texture": SubResource("AtlasTexture_6xjw1")
 }],
 "loop": true,
 "name": &"default",
@@ -30,16 +52,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_rtnd7")
+"texture": SubResource("AtlasTexture_ipgc7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_peoep")
+"texture": SubResource("AtlasTexture_xajca")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_uoivp")
+"texture": SubResource("AtlasTexture_rvbwh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_lpbxu")
+"texture": SubResource("AtlasTexture_1hu0d")
 }],
 "loop": true,
 "name": &"spawn",
@@ -57,4 +79,5 @@ shape = SubResource("RectangleShape2D_ba126")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0haco")
+animation = &"spawn"
 autoplay = "default"

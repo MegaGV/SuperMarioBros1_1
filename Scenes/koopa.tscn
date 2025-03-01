@@ -1,16 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8gsg7bhredlx"]
+[gd_scene load_steps=8 format=3 uid="uid://b8gsg7bhredlx"]
 
-[ext_resource type="Texture2D" uid="uid://deuem3w3p7poa" path="res://Assets/sprites/enemy/koopa_shell1.png" id="1_7p32i"]
 [ext_resource type="Script" path="res://Scripts/koopa.gd" id="1_vshql"]
-[ext_resource type="Texture2D" uid="uid://du4mlmuegusdp" path="res://Assets/sprites/enemy/koopa_walk1.png" id="2_mckia"]
-[ext_resource type="Texture2D" uid="uid://duqi8qv27xc3n" path="res://Assets/sprites/enemy/koopa_walk2.png" id="3_r75fw"]
+[ext_resource type="Texture2D" uid="uid://l55m02ms3xkm" path="res://Assets/sprites/marioEnemy.png" id="2_bs4vy"]
 [ext_resource type="Shape2D" uid="uid://dro5ky87unhsr" path="res://Resource/CollisionShapes/koopa_normal_collision_shape.tres" id="5_x054g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxmgk"]
+atlas = ExtResource("2_bs4vy")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4bmt"]
+atlas = ExtResource("2_bs4vy")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abwax"]
+atlas = ExtResource("2_bs4vy")
+region = Rect2(64, 0, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wbr65"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_7p32i")
+"texture": SubResource("AtlasTexture_uxmgk")
 }],
 "loop": true,
 "name": &"shell",
@@ -18,10 +28,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_mckia")
+"texture": SubResource("AtlasTexture_v4bmt")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_r75fw")
+"texture": SubResource("AtlasTexture_abwax")
 }],
 "loop": true,
 "name": &"walk",
@@ -34,9 +44,9 @@ collision_mask = 2
 script = ExtResource("1_vshql")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -2)
+position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_wbr65")
-animation = &"walk"
+animation = &"shell"
 autoplay = "walk"
 
 [node name="Area2D" type="Area2D" parent="."]

@@ -21,10 +21,10 @@ const KILL_VELOCITY_Y = -200
 func _ready():
     set_physics_process(false)
 
-func _process(delta):
+func _process(_delta):
     pass
 
-func stomped(playerPosition : Vector2):
+func stomped(_playerPosition : Vector2):
     pass
 
 func basic_move(delta):
@@ -48,8 +48,8 @@ func death():
     area_2d.set_collision_layer_value(3, false)
     get_tree().create_timer(1).timeout.connect(queue_free)
     
-func update_collision_shape(shape, position):
-    body_collision_shape_2d.set_deferred("position", position)
-    body_collision_shape_2d.set_deferred("shape", shape)
-    area_collision_shape_2d.set_deferred("position", position)
-    area_collision_shape_2d.set_deferred("shape", shape)
+func update_collision_shape(newShape, newPosition):
+    body_collision_shape_2d.set_deferred("position", newPosition)
+    body_collision_shape_2d.set_deferred("shape", newShape)
+    area_collision_shape_2d.set_deferred("position", newPosition)
+    area_collision_shape_2d.set_deferred("shape", newShape)

@@ -23,8 +23,8 @@ func update_time(time: int):
 func transfer_number(number: int, limitSize: int) -> Array:
     var digits = []
     var number_as_string = str(number)
-    for char in number_as_string:
-        digits.append(int(char))
+    for numberChar in number_as_string:
+        digits.append(int(numberChar))
     digits.reverse()
     while digits.size() < limitSize:
         digits.append(0)

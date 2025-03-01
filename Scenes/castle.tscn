@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b27pk0lkuelm8"]
 
 [ext_resource type="Script" path="res://Scripts/castle.gd" id="1_d5ebb"]
-[ext_resource type="Texture2D" uid="uid://bjs1yfsrxkkdr" path="res://Assets/sprites/effect/castle.png" id="1_j2m1d"]
+[ext_resource type="Texture2D" uid="uid://c6yfmevgcroii" path="res://Assets/sprites/marioEffect.png" id="2_0p1yx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3y4bl"]
 size = Vector2(20, 33)
@@ -11,7 +11,9 @@ collision_layer = 64
 script = ExtResource("1_d5ebb")
 
 [node name="Castle" type="Sprite2D" parent="."]
-texture = ExtResource("1_j2m1d")
+texture = ExtResource("2_0p1yx")
+region_enabled = true
+region_rect = Rect2(64, 0, 80, 80)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 23.5)

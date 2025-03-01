@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://x5b2321arh3b"]
 
-[ext_resource type="Texture2D" uid="uid://q43kn7k7ubcq" path="res://Assets/sprites/effect/flag1.png" id="1_fq0jr"]
 [ext_resource type="Script" path="res://Scripts/flag.gd" id="1_omfrc"]
+[ext_resource type="Texture2D" uid="uid://c6yfmevgcroii" path="res://Assets/sprites/marioEffect.png" id="2_ud6ga"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_84eyt"]
 size = Vector2(8, 136)
@@ -13,7 +13,9 @@ script = ExtResource("1_omfrc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-8, -120)
-texture = ExtResource("1_fq0jr")
+texture = ExtResource("2_ud6ga")
+region_enabled = true
+region_rect = Rect2(0, 48, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -68)

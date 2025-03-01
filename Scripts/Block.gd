@@ -4,7 +4,7 @@ class_name Block
 
 @onready var raycast_2d = $RayCast2D
 
-func bump(player_mode: Player.PlayerMode):
+func bump(_player_mode: Player.PlayerMode):
     pass
 
 func bump_up():
