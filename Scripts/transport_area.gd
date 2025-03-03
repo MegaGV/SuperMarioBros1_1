@@ -2,6 +2,9 @@ extends Area2D
 
 class_name TransportArea
 
+# 传送区域
+# 放在管道口的判定区域
+
 enum ENTER_DIRECTION {
     DOWN,
     RIGHT,
@@ -15,15 +18,7 @@ enum ENTER_DIRECTION {
 @export var enterDirection = ENTER_DIRECTION.DOWN
 @export var exitScenePath: String
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-    pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-    pass
-
+# 根据玩家位置，返回进入管道时的方向，再根据这个方向播放动画
 func transportCheck(pos: Vector2):
     match enterDirection:
         ENTER_DIRECTION.DOWN:

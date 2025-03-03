@@ -1,5 +1,7 @@
 extends Node
 
+# SoundManager - 已全局自动加载
+# 音效管理器
 
 var jump: AudioStreamPlayer
 var oneup: AudioStreamPlayer
@@ -33,6 +35,7 @@ func _ready() -> void:
 func audioInit(stream: AudioStream) -> AudioStreamPlayer:
     var player = AudioStreamPlayer.new()
     player.stream = stream
+    player.bus = "SFX"
     add_child(player)
     return player
 

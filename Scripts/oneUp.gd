@@ -2,6 +2,9 @@ extends Bonus
 
 class_name OneUp
 
+# 奖命道具
+# 即绿蘑菇
+
 @export var speed_x = 30
 @export var speed_y = 0
 @export var speed_y_max = 120
@@ -10,17 +13,14 @@ class_name OneUp
 @onready var shape_cast_2d_y = $ShapeCast2D
 @onready var shape_cast_2d_x = $ShapeCast2D2
 
-var spawned = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    var mushroom_tween = get_tree().create_tween()
-    mushroom_tween.tween_property(self, "position", position + Vector2(0 ,-16), .4)
-    mushroom_tween.tween_callback(func() : spawned = false)
+    spawn_animation()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-    if !spawned:
+    if !spawning:
         if !shape_cast_2d_y.is_colliding():
             speed_y = lerpf(speed_y, speed_y_max, velocity_y)
             position.y += speed_y * delta
@@ -39,6 +39,7 @@ func bump_up(pos: Vector2):
     else:
         bump_tween.tween_property(self, "position", position + Vector2(-10, -20), .2)
         speed_x = -abs(speed_x)
+
 
 func get_bonus():
     super.get_bonus()

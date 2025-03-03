@@ -46,7 +46,7 @@ script = ExtResource("1_vshql")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_wbr65")
-animation = &"shell"
+animation = &"walk"
 autoplay = "walk"
 
 [node name="Area2D" type="Area2D" parent="."]

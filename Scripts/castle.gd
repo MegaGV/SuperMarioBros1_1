@@ -2,11 +2,5 @@ extends Area2D
 
 class_name Castle
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-    pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-    pass
+# 城堡
+# 因为通关结算需要检测所以给个class_name占位

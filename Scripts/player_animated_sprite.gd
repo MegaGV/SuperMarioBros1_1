@@ -41,7 +41,7 @@ func reset_player_properties():
     offset = Vector2.ZERO
     get_parent().freeze(true)
 
-
+# 大小变时因为精灵图身高不一样，直接播放会导致穿模，需要调整对应帧的y轴坐标
 func _on_frame_changed():
     if animation == "small_to_big":
         var mode = get_parent().player_mode

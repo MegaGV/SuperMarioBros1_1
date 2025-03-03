@@ -1,5 +1,8 @@
 extends Node
 
+# MusicManager - 已全局自动加载
+# 音乐管理器
+
 const BGM_UNDERGROUND = preload("res://Assets/sound/UNDERGROUND.mp3")
 const BGM_GROUND = preload("res://Assets/sound/GROUND.mp3")
 const BGM_CASTLE = preload("res://Assets/sound/Castle.mp3")

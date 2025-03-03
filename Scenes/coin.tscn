@@ -79,5 +79,4 @@ shape = SubResource("RectangleShape2D_ba126")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0haco")
-animation = &"spawn"
 autoplay = "default"

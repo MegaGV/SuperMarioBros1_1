@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://dfbbnqns4djsc"]
+[gd_scene load_steps=8 format=4 uid="uid://dfbbnqns4djsc"]
 
 [ext_resource type="Script" path="res://Scripts/underground.gd" id="1_hmms2"]
 [ext_resource type="TileSet" uid="uid://66ultr32dfic" path="res://Resource/TileSet/main_tile_set.tres" id="1_iutoc"]
 [ext_resource type="PackedScene" uid="uid://bkj72hirxail7" path="res://Scenes/player.tscn" id="2_tby2f"]
 [ext_resource type="PackedScene" uid="uid://wtp5lppx4e74" path="res://Scenes/transport_area.tscn" id="3_dr2jb"]
-[ext_resource type="PackedScene" uid="uid://ctd16ehspvb36" path="res://Scenes/level_up.tscn" id="4_onufe"]
 [ext_resource type="PackedScene" uid="uid://677tf5dnlixc" path="res://Scenes/coin.tscn" id="5_yrvhc"]
 [ext_resource type="Script" path="res://Scripts/levelManager.gd" id="6_co0mq"]
 [ext_resource type="PackedScene" uid="uid://dpjotfnq3w2ss" path="res://Scenes/ui.tscn" id="7_4uutc"]
@@ -38,14 +37,6 @@ position = Vector2(210, 202)
 exitPos = Vector2(2636, 176)
 enterDirection = 1
 exitScenePath = "res://Scenes/main.tscn"
-
-[node name="LevelUp" parent="." instance=ExtResource("4_onufe")]
-position = Vector2(44, 216)
-type = 1
-
-[node name="LevelUp2" parent="." instance=ExtResource("4_onufe")]
-position = Vector2(28, 216)
-type = 1
 
 [node name="Bonuses" type="Node" parent="."]
 

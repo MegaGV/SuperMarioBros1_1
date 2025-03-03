@@ -1,15 +1,7 @@
 extends Node2D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-    pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-    pass
-
+# 爆炸效果
+# 计划用于火球接触目标、通关结算烟花使用
 
 func _on_animated_sprite_2d_animation_finished():
     queue_free()

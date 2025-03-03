@@ -497,7 +497,7 @@ script = ExtResource("1_uinwr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ps0op")
-animation = &"fire_squat"
+animation = &"small_idle"
 script = ExtResource("23_riqs1")
 
 [node name="Area2D" type="Area2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bhlhjy321yyuw"]
+[gd_scene load_steps=14 format=4 uid="uid://bhlhjy321yyuw"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_rt3wg"]
 [ext_resource type="TileSet" uid="uid://66ultr32dfic" path="res://Resource/TileSet/main_tile_set.tres" id="2_hln22"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://42hfyajguclg" path="res://Scenes/questionBox.tscn" id="8_r4t3o"]
 [ext_resource type="PackedScene" uid="uid://b8gsg7bhredlx" path="res://Scenes/koopa.tscn" id="8_sqbm3"]
 [ext_resource type="Script" path="res://Scripts/levelManager.gd" id="9_m3svn"]
-[ext_resource type="PackedScene" uid="uid://ctd16ehspvb36" path="res://Scenes/level_up.tscn" id="10_oqd30"]
 [ext_resource type="PackedScene" uid="uid://dpjotfnq3w2ss" path="res://Scenes/ui.tscn" id="11_oppm4"]
 [ext_resource type="PackedScene" uid="uid://x5b2321arh3b" path="res://Scenes/flag.tscn" id="12_uydg6"]
 [ext_resource type="PackedScene" uid="uid://b27pk0lkuelm8" path="res://Scenes/castle.tscn" id="13_dhqqb"]
@@ -247,14 +246,6 @@ wait_time = 0.5
 script = ExtResource("9_m3svn")
 ui = NodePath("../UI")
 timer = NodePath("../Timer")
-
-[node name="LevelUp" parent="." instance=ExtResource("10_oqd30")]
-position = Vector2(37, 216)
-type = 1
-
-[node name="LevelUp2" parent="." instance=ExtResource("10_oqd30")]
-position = Vector2(21, 216)
-type = 1
 
 [node name="TransportArea" parent="." instance=ExtResource("3_qti13")]
 position = Vector2(928, 147)
