@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://677tf5dnlixc"]
 
-[ext_resource type="Script" path="res://Scripts/coin.gd" id="1_60shi"]
+[ext_resource type="Script" uid="uid://bbxniyx13dpq4" path="res://Scripts/coin.gd" id="1_60shi"]
 [ext_resource type="Texture2D" uid="uid://d01kdny2fg4h6" path="res://Assets/sprites/marioItem.png" id="2_hic85"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ba126"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=4 uid="uid://dpjotfnq3w2ss"]
 
-[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_siarp"]
+[ext_resource type="Script" uid="uid://c5vwxufiuqkfb" path="res://Scripts/ui.gd" id="1_siarp"]
 [ext_resource type="TileSet" uid="uid://b675y6w5qm1gr" path="res://Resource/TileSet/ui.tres" id="2_hvc6b"]
 
 [node name="UI" type="CanvasLayer"]

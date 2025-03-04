@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bkhtb06x4tfya"]
 
-[ext_resource type="Script" path="res://Scripts/fire_ball.gd" id="1_745wv"]
+[ext_resource type="Script" uid="uid://b4eb5wl2pl8o" path="res://Scripts/fire_ball.gd" id="1_745wv"]
 [ext_resource type="Texture2D" uid="uid://c6yfmevgcroii" path="res://Assets/sprites/marioEffect.png" id="2_n0gyc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndlmb"]

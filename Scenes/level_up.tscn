@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://ctd16ehspvb36"]
 
-[ext_resource type="Script" path="res://Scripts/levelUp.gd" id="1_x5q7g"]
+[ext_resource type="Script" uid="uid://bjsody0uh4li4" path="res://Scripts/LevelUp.gd" id="1_x5q7g"]
 [ext_resource type="Texture2D" uid="uid://d01kdny2fg4h6" path="res://Assets/sprites/marioItem.png" id="2_amt3k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fakxt"]

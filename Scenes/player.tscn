@@ -1,8 +1,8 @@
 [gd_scene load_steps=44 format=3 uid="uid://bkj72hirxail7"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_uinwr"]
+[ext_resource type="Script" uid="uid://y51di0k0fsrv" path="res://Scripts/player.gd" id="1_uinwr"]
 [ext_resource type="Texture2D" uid="uid://bqt4w0vs3ofmd" path="res://Assets/sprites/marioSprite.png" id="2_4g21j"]
-[ext_resource type="Script" path="res://Scripts/player_animated_sprite.gd" id="23_riqs1"]
+[ext_resource type="Script" uid="uid://d35a516vl24go" path="res://Scripts/player_animated_sprite.gd" id="23_riqs1"]
 [ext_resource type="Shape2D" uid="uid://drur7mdf2b3jt" path="res://Resource/CollisionShapes/mario_small_collision_shape.tres" id="24_ffdnc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oqhac"]
