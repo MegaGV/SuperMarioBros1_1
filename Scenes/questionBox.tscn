@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://42hfyajguclg"]
 
-[ext_resource type="Script" path="res://Scripts/questionBox.gd" id="1_v3fgb"]
+[ext_resource type="Script" uid="uid://dut6bju4cuaty" path="res://Scripts/questionBox.gd" id="1_v3fgb"]
 [ext_resource type="Texture2D" uid="uid://b7dvfm577pr1o" path="res://Assets/sprites/tileset1.png" id="2_fhyth"]
 [ext_resource type="Texture2D" uid="uid://qos0sl8nq1fd" path="res://Assets/sprites/tileset3.png" id="3_23vfp"]
 

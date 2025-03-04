@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c3sqyt50ms363"]
 
-[ext_resource type="Script" path="res://Scripts/pointsLabel.gd" id="1_mkev3"]
+[ext_resource type="Script" uid="uid://d3oymh14jm1uy" path="res://Scripts/pointsLabel.gd" id="1_mkev3"]
 
 [node name="PointsLabel" type="Label"]
 offset_right = 40.0

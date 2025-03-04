@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://wtp5lppx4e74"]
 
-[ext_resource type="Script" path="res://Scripts/transport_area.gd" id="1_fwqnr"]
+[ext_resource type="Script" uid="uid://djbiracinenr3" path="res://Scripts/transport_area.gd" id="1_fwqnr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_helca"]
 size = Vector2(10, 10)

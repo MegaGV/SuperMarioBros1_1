@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dtc8gt38pmq7b"]
 
-[ext_resource type="Script" path="res://Scripts/goomba.gd" id="1_k0h4w"]
+[ext_resource type="Script" uid="uid://dogw026ydqa4d" path="res://Scripts/goomba.gd" id="1_k0h4w"]
 [ext_resource type="Texture2D" uid="uid://l55m02ms3xkm" path="res://Assets/sprites/marioEnemy.png" id="3_cakr7"]
 [ext_resource type="Shape2D" uid="uid://1q5yvca0bn2v" path="res://Resource/CollisionShapes/goomba_normal_collision_shape.tres" id="5_tr80e"]
 

@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=4 uid="uid://dfbbnqns4djsc"]
 
-[ext_resource type="Script" path="res://Scripts/underground.gd" id="1_hmms2"]
+[ext_resource type="Script" uid="uid://5uerft1e7vw3" path="res://Scripts/underground.gd" id="1_hmms2"]
 [ext_resource type="TileSet" uid="uid://66ultr32dfic" path="res://Resource/TileSet/main_tile_set.tres" id="1_iutoc"]
 [ext_resource type="PackedScene" uid="uid://bkj72hirxail7" path="res://Scenes/player.tscn" id="2_tby2f"]
 [ext_resource type="PackedScene" uid="uid://wtp5lppx4e74" path="res://Scenes/transport_area.tscn" id="3_dr2jb"]
 [ext_resource type="PackedScene" uid="uid://677tf5dnlixc" path="res://Scenes/coin.tscn" id="5_yrvhc"]
-[ext_resource type="Script" path="res://Scripts/levelManager.gd" id="6_co0mq"]
+[ext_resource type="Script" uid="uid://unq67onf4cdj" path="res://Scripts/levelManager.gd" id="6_co0mq"]
 [ext_resource type="PackedScene" uid="uid://dpjotfnq3w2ss" path="res://Scenes/ui.tscn" id="7_4uutc"]
 
 [node name="Underground" type="Node"]
