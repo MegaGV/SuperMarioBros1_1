@@ -27,6 +27,7 @@ enum BonusStatus{
 @export var bonus_status = BonusStatus.NORMAL
 
 func _ready():
+    bonus_array = bonus_array.duplicate()  # Make bug happy https://github.com/godotengine/godot/issues/96181
     # 默认是问号盒子动画，如果是其他类型在生成时动态调整
     if bonus_status == BonusStatus.INVISIBLE:
         animated_sprite_2d.visible = false
